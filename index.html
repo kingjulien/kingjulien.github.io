@@ -3,37 +3,2136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIFA World Cup 2026 — Round 1 Picks</title>
+<title>FIFA World Cup 2026 — Group Stage Round 1 Betting Report</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e0e0e0; padding: 24px; }
-  h1 { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 20px; }
-  .summary { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-  .stat { background: #1a1d27; border-radius: 8px; padding: 12px 18px; }
-  .stat-val { font-size: 1.5rem; font-weight: 700; color: #fff; }
-  .stat-lbl { font-size: 0.75rem; color: #888; margin-top: 2px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-  thead tr { background: #1a1d27; }
-  th { padding: 10px 12px; text-align: left; color: #888; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
-  td { padding: 9px 12px; border-bottom: 1px solid #1e2130; vertical-align: middle; }
-  tr:hover td { background: #141620; }
-  .num { color: #555; width: 32px; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em; white-space: nowrap; }
-  .badge-VERY.HIGH, .badge-VERY-HIGH { background: #7c3aed22; color: #a78bfa; border: 1px solid #7c3aed55; }
-  .badge-HIGH { background: #05966922; color: #34d399; border: 1px solid #05966955; }
-  .badge-MEDIUM { background: #92400e22; color: #fbbf24; border: 1px solid #92400e55; }
-  .badge-LOW { background: #7f1d1d22; color: #f87171; border: 1px solid #7f1d1d55; }
-  .match { color: #888; font-size: 0.78rem; }
-  .odds { color: #60a5fa; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .stake { font-weight: 600; color: #fff; }
-  .total-row td { background: #1a1d27; font-weight: 700; color: #fff; border-top: 2px solid #2d3148; }
-  .badge-PENDING { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
-  .badge-WON { background: #05966922; color: #34d399; border: 1px solid #05966955; }
-  .badge-LOST { background: #7f1d1d22; color: #f87171; border: 1px solid #7f1d1d55; }
-  .badge-VOID { background: #1c1917; color: #78716c; border: 1px solid #44403c; }
-  .profit { font-variant-numeric: tabular-nums; font-weight: 600; }
-  .profit-pos { color: #34d399; }
+  :root {
+    --primary: #003d8a;
+    --secondary: #d40000;
+    --accent: #f5a623;
+    --bg: #0d0d1a;
+    --card: #141428;
+    --card2: #1a1a30;
+    --border: #2a2a4a;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --green: #00c853;
+    --yellow: #ffd600;
+    --red: #ff1744;
+    --blue: #2979ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, #003d8a 0%, #001a4d 50%, #8b0000 100%);
+    padding: 40px 20px; text-align: center;
+    border-bottom: 3px solid var(--accent); position: relative; overflow: hidden;
+  }
+  .header-badge {
+    display: inline-block; background: var(--accent); color: #000;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase;
+  }
+  .header h1 { font-size: clamp(22px,4vw,36px); font-weight: 800; margin-bottom: 8px; }
+  .header h1 span { color: var(--accent); }
+  .header p { color: rgba(255,255,255,0.75); font-size: 14px; }
+  .header-meta { display: flex; justify-content: center; gap: 16px; margin-top: 18px; flex-wrap: wrap; }
+  .header-meta-item {
+    background: rgba(255,255,255,0.08); padding: 6px 16px; border-radius: 20px;
+    font-size: 13px; border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 30px 16px; }
+
+  .alert-banner {
+    background: linear-gradient(90deg, rgba(0,61,138,0.3), rgba(212,0,0,0.15));
+    border: 1px solid var(--primary); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 14px 18px; margin-bottom: 28px; font-size: 14px;
+  }
+  .alert-banner strong { color: var(--accent); }
+
+  .section-title {
+    font-size: 18px; font-weight: 700; color: var(--accent);
+    margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::before {
+    content: ''; display: inline-block; width: 4px; height: 18px;
+    background: var(--accent); border-radius: 2px;
+  }
+
+  .group-label {
+    display: inline-block; background: var(--primary); color: var(--accent);
+    font-size: 11px; font-weight: 800; letter-spacing: 2px; padding: 3px 12px;
+    border-radius: 12px; margin-bottom: 12px; text-transform: uppercase;
+  }
+
+  .match-card {
+    background: var(--card); border-radius: 14px; border: 1px solid var(--border);
+    overflow: hidden; margin-bottom: 24px; transition: transform 0.2s;
+  }
+  .match-card:hover { transform: translateY(-2px); }
+  .match-header {
+    background: linear-gradient(90deg, var(--card2), rgba(0,61,138,0.2));
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: space-between; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 8px;
+  }
+  .match-number { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .match-venue { background: var(--primary); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .conf-badge { font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 4px 10px; border-radius: 10px; }
+  .conf-vh  { background: rgba(0,200,83,0.2);  color: var(--green); border: 1px solid rgba(0,200,83,0.4); }
+  .conf-h   { background: rgba(41,121,255,0.15); color: #82b1ff;    border: 1px solid rgba(41,121,255,0.3); }
+  .conf-m   { background: rgba(255,214,0,0.15);  color: var(--yellow); border: 1px solid rgba(255,214,0,0.3); }
+  .conf-l   { background: rgba(136,136,170,0.15); color: var(--muted); border: 1px solid var(--border); }
+
+  .match-body { padding: 20px; }
+  .match-teams { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
+  .team-block { text-align: center; flex: 1; }
+  .team-name { font-size: clamp(14px,2.5vw,20px); font-weight: 800; margin-bottom: 4px; }
+  .team-sub { font-size: 12px; color: var(--muted); }
+  .vs-block { text-align: center; padding: 0 8px; }
+  .vs-text { font-size: 22px; font-weight: 800; color: var(--muted); }
+  .match-time-small { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .odds-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .odds-item { flex: 1; min-width: 80px; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; text-align: center; }
+  .odds-label { font-size: 10px; color: var(--muted); margin-bottom: 3px; font-weight: 600; letter-spacing: 0.5px; }
+  .odds-value { font-size: 16px; font-weight: 700; }
+  .odds-fav { border-color: var(--accent); }
+  .odds-fav .odds-value { color: var(--accent); }
+
+  .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  @media(max-width:600px) { .analysis-grid { grid-template-columns: 1fr; } }
+  .analysis-box { background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .analysis-box h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
+  .analysis-box li { font-size: 13px; margin-bottom: 3px; padding-left: 14px; list-style: disc; }
+
+  .bet-recs { display: flex; flex-direction: column; gap: 8px; }
+  .bet-rec { display: flex; align-items: flex-start; gap: 12px; background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .bet-rec.primary { border-color: var(--green); background: rgba(0,200,83,0.05); }
+  .bet-rec.secondary { border-color: var(--yellow); background: rgba(255,214,0,0.04); }
+  .bet-rec.speculative { border-color: var(--muted); background: rgba(136,136,170,0.05); }
+  .bet-icon { font-size: 18px; min-width: 24px; }
+  .bet-details { flex: 1; }
+  .bet-market { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .bet-selection { font-size: 15px; font-weight: 800; color: var(--accent); margin-bottom: 2px; }
+  .bet-meta { font-size: 12px; color: var(--muted); }
+  .bet-odds-badge { background: var(--primary); padding: 3px 9px; border-radius: 6px; font-weight: 700; font-size: 14px; white-space: nowrap; align-self: center; }
+
+  .summary-table { width: 100%; border-collapse: collapse; font-size: 13px; border-radius: 10px; overflow: hidden; margin-bottom: 32px; }
+  .summary-table thead th { background: var(--primary); padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+  .summary-table tbody tr { background: var(--card); border-bottom: 1px solid var(--border); }
+  .summary-table tbody tr:nth-child(even) { background: var(--card2); }
+  .summary-table td { padding: 10px 12px; vertical-align: middle; }
+  .conf-high { color: var(--green); font-weight: 700; }
+  .conf-vh-text { color: #69f0ae; font-weight: 800; }
+  .conf-med  { color: var(--yellow); font-weight: 700; }
+  .conf-low  { color: #ff8a80; font-weight: 700; }
+
+  .top-picks-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; margin-bottom: 32px; }
+  .top-pick-card {
+    background: linear-gradient(135deg,rgba(0,200,83,0.1),rgba(0,200,83,0.04));
+    border: 1px solid rgba(0,200,83,0.3); border-radius: 12px; padding: 18px;
+  }
+  .top-pick-label { font-size: 11px; color: var(--green); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .top-pick-sel { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+  .top-pick-match { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .top-pick-odds { font-size: 22px; font-weight: 800; color: var(--green); }
+  .top-pick-desc { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .bankroll-box { background: rgba(41,121,255,0.08); border: 1px solid rgba(41,121,255,0.25); border-radius: 10px; padding: 16px 20px; font-size: 13px; margin: 28px 0; }
+  .bankroll-box h4 { color: #82b1ff; margin-bottom: 8px; font-size: 14px; }
+  .bankroll-box li { margin-bottom: 5px; padding-left: 14px; list-style: disc; }
+
+  .disclaimer { background: rgba(255,23,68,0.06); border: 1px solid rgba(255,23,68,0.2); border-radius: 10px; padding: 20px; font-size: 12px; color: var(--muted); line-height: 1.7; margin-top: 40px; }
+  .disclaimer h3 { color: #ff8a80; margin-bottom: 10px; font-size: 14px; }
+
+  .injury-tag { display: inline-block; background: rgba(255,23,68,0.15); color: #ff8a80; border: 1px solid rgba(255,23,68,0.3); border-radius: 4px; font-size: 10px; font-weight: 700; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
+  .note-tag { display: inline-block; background: rgba(255,214,0,0.15); color: var(--yellow); border: 1px solid rgba(255,214,0,0.3); border-radius: 4px; font-size: 10px; font-weight: 700; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
+
+  @media(max-width:600px) { .match-teams { flex-direction: column; } .odds-row { flex-wrap: wrap; } .odds-item { min-width: calc(50% - 4px); } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">FIFA World Cup 2026</div>
+  <h1>Group Stage <span>Round 1 Betting Report</span></h1>
+  <p>All 24 Matchday 1 fixtures — Groups A through L — June 11-17, 2026</p>
+  <div class="header-meta">
+    <span class="header-meta-item">Generated: June 6, 2026</span>
+    <span class="header-meta-item">48 Teams | 12 Groups | USA / Canada / Mexico</span>
+    <span class="header-meta-item">Live Data: ESPN | bet365 | FanDuel | Squawka | Yahoo Sports</span>
+    <span class="header-meta-item">24 Matches | 5 Days</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="alert-banner">
+  <strong>Tournament Context:</strong> First-ever 48-team World Cup. Opening Matchday 1 games historically average 2.4 goals/game (vs 2.69 overall group-stage avg) — teams prioritize not losing. Under 2.5 Goals landed in ~55% of group-stage matches since 2010. Three host nations (USA, Canada, Mexico) carry real crowd and acclimatization advantages. Mexico's Azteca altitude (2,240m) is a structural edge all tournament.
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ GROUP A ══ -->
+<div class="section-title">Group A — Mexico, South Korea, South Africa, Czechia</div>
+
+<!-- Match 1: Mexico vs South Africa -->
+<div class="group-label">GROUP A — JUNE 11</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 1 | Thu Jun 11 | 15:00 ET</span>
+    <span class="match-venue">Estadio Azteca, Mexico City (2,240m altitude)</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Mexico</div>
+        <div class="team-sub">Co-Host | Rank ~13</div>
+        <div class="team-sub" style="color:#ff8a80">Lozano excluded; Giménez doubtful (Achilles)</div>
+      </div>
+      <div class="vs-block">
+        <div class="vs-text">VS</div>
+        <div class="match-time-small">Tournament Opening Match</div>
+      </div>
+      <div class="team-block">
+        <div class="team-name">South Africa</div>
+        <div class="team-sub">CAF Qualifier | Rank ~58</div>
+        <div class="team-sub">Key man: Lyle Foster (Burnley)</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Mexico (1)</div><div class="odds-value">1.48</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.00</div></div>
+      <div class="odds-item"><div class="odds-label">South Africa (2)</div><div class="odds-value">7.00</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.10</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.90</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Key Factors</h4>
+        <ul>
+          <li>Azteca altitude (2,240m) — visiting teams fatigue sharply in 2nd half</li>
+          <li>Mexico ranked 45 places above South Africa in FIFA rankings</li>
+          <li>Home opener pressure — Mexico will be emotionally charged</li>
+          <li>Edson Alvarez recovered, played 60 min vs Australia (May 31)</li>
+          <li>Raul Jimenez starts as CF (Gimenez doubtful, Lozano excluded)</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Team News</h4>
+        <ul>
+          <li><strong>MEX:</strong> Alvarez fit (ankle surgery Feb, returned May). Lozano excluded from squad. Gimenez Achilles concern — Jimenez expected to start CF.</li>
+          <li><strong>RSA:</strong> Lyle Foster (Burnley, 3 PL goals) leads attack. Squad largely plays outside top-5 European leagues. Altitude will be a severe test.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Mexico Win (1)</div>
+          <div class="bet-meta">HIGH confidence | 2.0u | Altitude + home crowd + quality gap all favor Mexico decisively</div>
+        </div>
+        <div class="bet-odds-badge">1.48</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Tournament opener caution; Mexico likely to grind rather than blow out</div>
+        </div>
+        <div class="bet-odds-badge">1.90</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Both Teams to Score</div>
+          <div class="bet-selection">BET: BTTS No</div>
+          <div class="bet-meta">MEDIUM | 1.0u | South Africa attack structurally weak; altitude compounds their limitations</div>
+        </div>
+        <div class="bet-odds-badge">1.72</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Match 2: South Korea vs Czechia -->
+<div class="group-label">GROUP A — JUNE 11</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 2 | Thu Jun 11 | 22:00 ET</span>
+    <span class="match-venue">Estadio Akron, Zapopan (Guadalajara), Mexico</span>
+    <span class="conf-badge conf-m">MEDIUM</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">South Korea</div>
+        <div class="team-sub">AFC Qualifier | Captain: Son Heung-Min</div>
+        <div class="team-sub" style="color:#ff8a80">Defensive setup concerns in March window</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div><div class="match-time-small">Both need points</div></div>
+      <div class="team-block">
+        <div class="team-name">Czechia</div>
+        <div class="team-sub">UEFA | First WC since 2006</div>
+        <div class="team-sub">Qualified via 2 penalty shootouts</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">South Korea (1)</div><div class="odds-value">2.20</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">2.80</div></div>
+      <div class="odds-item"><div class="odds-label">Czechia (2)</div><div class="odds-value">3.20</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.20</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.85</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Key Factors</h4>
+        <ul>
+          <li>Son Heung-Min — biggest individual quality on pitch; his form pivotal</li>
+          <li>Czechia qualified via 2 shootouts — mentally resilient, quality borderline</li>
+          <li>Both teams cannot afford a defeat in Group A behind Mexico</li>
+          <li>Neutral venue — no home advantage for either side</li>
+          <li>Conservative openers from both managers near-certain</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Analysis</h4>
+        <ul>
+          <li>Even quality match — Korea's technical edge vs Czech experience</li>
+          <li>Schick (Leverkusen) is Czech's main goal threat</li>
+          <li>Korea's March form was poor defensively — could be exposed</li>
+          <li>Draw is statistically most likely single outcome at these odds</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Draw (X)</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Evenly-matched opener; both teams too cautious to push for winner</div>
+        </div>
+        <div class="bet-odds-badge">2.80</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Tournament opener caution between two pragmatic sides</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GROUP B ══ -->
+<div class="section-title">Group B — Canada, Switzerland, Bosnia-Herzegovina, Qatar</div>
+
+<!-- Match 3: Canada vs Bosnia -->
+<div class="group-label">GROUP B — JUNE 12</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 3 | Fri Jun 12 | 15:00 ET</span>
+    <span class="match-venue">BMO Field, Toronto, Canada</span>
+    <span class="conf-badge conf-m">MEDIUM</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Canada <span class="injury-tag">INJURIES</span></div>
+        <div class="team-sub">Co-Host | Marsch's squad</div>
+        <div class="team-sub" style="color:#ff8a80">Davies (major doubt), Flores (ACL out), Bombito (hobbled)</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div><div class="match-time-small">Home opener</div></div>
+      <div class="team-block">
+        <div class="team-name">Bosnia-Herz.</div>
+        <div class="team-sub">UEFA | Beat Italy & Wales to qualify</div>
+        <div class="team-sub">Set-piece threat; 40-yr-old Dzeko leads</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Canada (1)</div><div class="odds-value">2.05</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.00</div></div>
+      <div class="odds-item"><div class="odds-label">Bosnia (2)</div><div class="odds-value">4.00</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.30</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.80</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Canada Injury Crisis</h4>
+        <ul>
+          <li>Alphonso Davies — entire tournament in doubt (unconfirmed)</li>
+          <li>Marcelo Flores — OUT (ACL tear, confirmed)</li>
+          <li>Moise Bombito — played only 30 min in last friendly, hobbled</li>
+          <li>Folarin Balogun (Monaco, 19 goals) is now the key man</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Bosnia Strengths</h4>
+        <ul>
+          <li>Beat Italy (UEFA playoff) to qualify — genuine upset pedigree</li>
+          <li>Dzeko heading threat from set-pieces — Canada's CB pairing untested</li>
+          <li>Experienced squad used to must-win pressure in qualifying</li>
+          <li>Home crowd helps Canada but cannot replace Davies</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Draw (X)</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Canada injuries significantly weaken case; Bosnia set-pieces dangerous</div>
+        </div>
+        <div class="bet-odds-badge">3.00</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Both sides conservative; Bosnia defend deep</div>
+        </div>
+        <div class="bet-odds-badge">1.80</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Match 4: Qatar vs Switzerland -->
+<div class="group-label">GROUP B — JUNE 13</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 4 | Sat Jun 13 | 15:00 ET</span>
+    <span class="match-venue">Levi's Stadium, Santa Clara, California</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Qatar</div>
+        <div class="team-sub">AFC | No home advantage (played in USA)</div>
+        <div class="team-sub">Akram Afif leads; 7% win probability</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Switzerland</div>
+        <div class="team-sub">UEFA | Structured & disciplined</div>
+        <div class="team-sub">Breel Embolo (8G+3A in Ligue 1)</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Qatar (1)</div><div class="odds-value">8.50</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.50</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Switzerland (2)</div><div class="odds-value">1.30</div></div>
+      <div class="odds-item"><div class="odds-label">Over 1.5</div><div class="odds-value">1.55</div></div>
+      <div class="odds-item"><div class="odds-label">SUI Win & O1.5</div><div class="odds-value">1.55</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Key Factors</h4>
+        <ul>
+          <li>Qatar playing in USA — zero home advantage that drove 2022 form</li>
+          <li>Qatar Stars League players vs Swiss Bundesliga/Ligue 1 professionals</li>
+          <li>Embolo in strong Ligue 1 form — clear goal threat vs weak defense</li>
+          <li>Xhaka in midfield — controls tempo against limited Qatar press</li>
+          <li>Market implies 78% Switzerland win — fair assessment</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Reasoning</h4>
+        <ul>
+          <li>Qatar have 7% win probability — essentially a dead rubber for them</li>
+          <li>Switzerland are structured, athletic, experienced at major tournaments</li>
+          <li>Win & Over 1.5 at 1.55 is the value line — better return than bare ML</li>
+          <li>Embolo anytime scorer at ~2.50 is speculative value</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Win & Goals Combo</div>
+          <div class="bet-selection">BET: Switzerland Win & Over 1.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.0u | Near-certainty Switzerland win; will score 2+ vs weakest Group B team</div>
+        </div>
+        <div class="bet-odds-badge">1.55</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Anytime Scorer</div>
+          <div class="bet-selection">BET: Breel Embolo Anytime Scorer</div>
+          <div class="bet-meta">SPECULATIVE | 1.0u (max) | In-form striker vs weakest team in group</div>
+        </div>
+        <div class="bet-odds-badge">2.50</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ GROUP C ══ -->
+<div class="section-title">Group C — Brazil, Morocco, Scotland, Haiti</div>
+
+<!-- Match 5: Brazil vs Morocco -->
+<div class="group-label">GROUP C — JUNE 13</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 5 | Sat Jun 13 | 18:00 ET</span>
+    <span class="match-venue">MetLife Stadium, East Rutherford, New Jersey</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Brazil <span class="injury-tag">INJURIES</span></div>
+        <div class="team-sub">5x World Champions | Ancelotti</div>
+        <div class="team-sub" style="color:#ff8a80">Rodrygo (ACL), Militao (hamstring), Estevao (hamstring) OUT. Alisson doubt.</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Morocco <span class="injury-tag">DOUBTS</span></div>
+        <div class="team-sub">2022 Semi-Finalists | CAF</div>
+        <div class="team-sub" style="color:#ff8a80">Hakimi, Aguerd, Saibari — all fitness doubts</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Brazil (1)</div><div class="odds-value">1.57</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.80</div></div>
+      <div class="odds-item"><div class="odds-label">Morocco (2)</div><div class="odds-value">5.50</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.05</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.90</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Brazil Absences</h4>
+        <ul>
+          <li>Rodrygo — OUT (ACL tear) — major creative loss from right</li>
+          <li>Eder Militao — OUT (hamstring) — first-choice CB absent</li>
+          <li>Estevao — OUT (hamstring) — emerging young star unavailable</li>
+          <li>Alisson — fitness doubt; backup GK may start</li>
+          <li>Vinicius Jr + Raphinha still available — elite attacking duo</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Morocco Doubts</h4>
+        <ul>
+          <li>Hakimi — fitness doubt — primary right wing-back creator</li>
+          <li>Noussair Mazraoui likely deputizes if Hakimi misses</li>
+          <li>Aguerd doubt — first-choice CB, critical for aerial duels</li>
+          <li>Saibari (PSV, Eredivisie POTS) — fitness doubt, key creative force</li>
+          <li>El Kaabi (18G in Greek league) available and leading attack</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Brazil Win (1)</div>
+          <div class="bet-meta">HIGH | 2.0u | Vinicius + Raphinha elite even without Rodrygo; Morocco's fitness doubts are decisive</div>
+        </div>
+        <div class="bet-odds-badge">1.57</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">HIGH | 1.5u | Ancelotti conservative opener; Morocco's attack compromised by fitness doubts</div>
+        </div>
+        <div class="bet-odds-badge">1.90</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — BTTS</div>
+          <div class="bet-selection">BET: BTTS No</div>
+          <div class="bet-meta">MEDIUM | 1.0u | Morocco's attack weakened by absences; Brazil likely to keep a clean sheet</div>
+        </div>
+        <div class="bet-odds-badge">1.95</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Match 6: Haiti vs Scotland -->
+<div class="group-label">GROUP C — JUNE 13</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 6 | Sat Jun 13 | 21:00 ET</span>
+    <span class="match-venue">Gillette Stadium, Foxborough, Massachusetts</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Haiti</div>
+        <div class="team-sub">CONCACAF | First WC in expanded format</div>
+        <div class="team-sub">Remarkable achievement; limited top-level depth</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Scotland</div>
+        <div class="team-sub">UEFA | First WC since 1998</div>
+        <div class="team-sub">McTominay (Napoli), Robertson, Tierney</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Haiti (1)</div><div class="odds-value">7.00</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.50</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Scotland (2)</div><div class="odds-value">1.55</div></div>
+      <div class="odds-item"><div class="odds-label">Over 1.5</div><div class="odds-value">1.55</div></div>
+      <div class="odds-item"><div class="odds-label">Scotland -0.5 AH</div><div class="odds-value">1.65</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Scotland Quality Edge</h4>
+        <ul>
+          <li>Scott McTominay (Napoli) scored regularly in Serie A — world-class from midfield</li>
+          <li>Andrew Robertson (Liverpool LB) — elite left-back quality</li>
+          <li>Kieran Tierney adds depth at left back / versatile defensive role</li>
+          <li>Scotland's first World Cup since 1998 — squad emotionally motivated</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Haiti Limitations</h4>
+        <ul>
+          <li>Haiti squad largely plays outside top-5 European leagues</li>
+          <li>Caribbean football standard is a step below UEFA nations</li>
+          <li>Will defend deep and attempt to frustrate Scotland</li>
+          <li>Limited ability to create chances against organized Scotland defense</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Asian Handicap</div>
+          <div class="bet-selection">BET: Scotland -0.5 AH</div>
+          <div class="bet-meta">HIGH | 2.0u | Scotland significantly stronger; -0.5 AH gives slightly better return than straight ML</div>
+        </div>
+        <div class="bet-odds-badge">1.65</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Over 1.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Scotland will score; Haiti capable of consolation late on</div>
+        </div>
+        <div class="bet-odds-badge">1.55</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GROUP D ══ -->
+<div class="section-title">Group D — USA, Turkey, Paraguay, Australia</div>
+
+<!-- Match 7: USA vs Paraguay -->
+<div class="group-label">GROUP D — JUNE 12</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 7 | Fri Jun 12 | 21:00 ET</span>
+    <span class="match-venue">SoFi Stadium, Inglewood (Los Angeles), California</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">USA</div>
+        <div class="team-sub">Co-Host | Pochettino | Rank ~11</div>
+        <div class="team-sub" style="color:#ff8a80">Chris Richards (CB) — 2 torn ankle ligaments, day-to-day</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div><div class="match-time-small">Home opener at SoFi</div></div>
+      <div class="team-block">
+        <div class="team-name">Paraguay <span class="injury-tag">INJURIES</span></div>
+        <div class="team-sub">CONMEBOL Qualifier</div>
+        <div class="team-sub" style="color:#ff8a80">Enciso (injured Jun 5), Almiron (doubt), D.Gomez (doubt)</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">USA (1)</div><div class="odds-value">1.75</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.60</div></div>
+      <div class="odds-item"><div class="odds-label">Paraguay (2)</div><div class="odds-value">5.00</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.20</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.85</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>USA Advantages</h4>
+        <ul>
+          <li>Home crowd at SoFi Stadium — enormous atmosphere advantage</li>
+          <li>Folarin Balogun (Monaco, 19 goals) arrives in career-best form</li>
+          <li>Pochettino has built a cohesive, European-experienced squad</li>
+          <li>USMNT playing on home soil in first World Cup opener since 1994</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Paraguay Injury Crisis</h4>
+        <ul>
+          <li>Julio Enciso — injured in friendly vs Nicaragua, Jun 5 (confirmed)</li>
+          <li>Miguel Almiron — fitness doubt entering tournament</li>
+          <li>Diego Gomez — fitness doubt, key creative midfielder</li>
+          <li>Three key creative players absent = severely weakened attack</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: USA Win (1)</div>
+          <div class="bet-meta">HIGH | 2.0u | Home crowd + Paraguay missing 3 key creators = decisive structural advantage</div>
+        </div>
+        <div class="bet-odds-badge">1.75</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Paraguay's attack is compromised; USA will control without overextending</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Anytime Scorer</div>
+          <div class="bet-selection">BET: Folarin Balogun Anytime</div>
+          <div class="bet-meta">SPECULATIVE | 1.0u (max) | Career-best form striker vs depleted Paraguay defense</div>
+        </div>
+        <div class="bet-odds-badge">2.80</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Match 8: Australia vs Turkey -->
+<div class="group-label">GROUP D — JUNE 13</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 8 | Sat Jun 13 | 24:00 ET</span>
+    <span class="match-venue">BC Place, Vancouver, Canada</span>
+    <span class="conf-badge conf-m">MEDIUM</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Australia</div>
+        <div class="team-sub">AFC | 2022 R16 vs Argentina</div>
+        <div class="team-sub">Mitchell Duke leads; European-based squad</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Turkey</div>
+        <div class="team-sub">UEFA | Calhanoglu (Inter), Guler (Real Madrid)</div>
+        <div class="team-sub">Rated Group D's 2nd strongest side</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Australia (1)</div><div class="odds-value">3.60</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.20</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Turkey (2)</div><div class="odds-value">2.10</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.30</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.80</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Turkey's Edge</h4>
+        <ul>
+          <li>Hakan Calhanoglu (Inter Milan, UCL) — best midfielder on pitch</li>
+          <li>Arda Guler (Real Madrid) — young superstar with Champions League pedigree</li>
+          <li>Technical quality across the squad far exceeds A-League standard</li>
+          <li>Turkey seen as Group D's second-place challengers behind USA</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Australia's Case</h4>
+        <ul>
+          <li>2022 R16 experience vs Argentina — battle-hardened side</li>
+          <li>Mathew Ryan (Real Sociedad) provides reliable GK</li>
+          <li>Neutral Vancouver venue — no home advantage for either team</li>
+          <li>Cautious opener likely; Turkey won't commit too early</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Turkey Win (2)</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Calhanoglu + Guler's quality decisive; Australia's 2022 form was peak performance</div>
+        </div>
+        <div class="bet-odds-badge">2.10</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Conservative opener; both sides too organized to allow a high-scoring game</div>
+        </div>
+        <div class="bet-odds-badge">1.80</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ GROUP E ══ -->
+<div class="section-title">Group E — Germany, Ecuador, Ivory Coast, Curacao</div>
+
+<div class="group-label">GROUP E — JUNE 14</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 9 | Sun Jun 14 | 13:00 ET</span>
+    <span class="match-venue">NRG Stadium, Houston, Texas</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Germany <span class="note-tag">INJURY</span></div>
+        <div class="team-sub">UEFA | Nagelsmann | Rank ~4</div>
+        <div class="team-sub" style="color:#ff8a80">Karl OUT (muscle tear). Neuer doubt (calf). Musiala fitness concern.</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Curacao</div>
+        <div class="team-sub">CONCACAF | Smallest WC nation ever</div>
+        <div class="team-sub">Historic qualification; massive quality gap</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Germany Win & O2.5</div><div class="odds-value">1.65</div></div>
+      <div class="odds-item"><div class="odds-label">Germany ML</div><div class="odds-value">1.08</div></div>
+      <div class="odds-item"><div class="odds-label">Germany -2.5 AH</div><div class="odds-value">1.90</div></div>
+      <div class="odds-item"><div class="odds-label">Over 3.5</div><div class="odds-value">2.10</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Why Germany Win Big</h4>
+        <ul>
+          <li>Curacao are the weakest team at this World Cup — smallest nation ever</li>
+          <li>Germany have Goretzka, Pavlovic, Kimmich — elite European midfield</li>
+          <li>Even without Musiala (fitness concern), Germany's depth is far superior</li>
+          <li>Houston heat may prompt rotation but Curacao cannot defend at this level</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Germany Concerns</h4>
+        <ul>
+          <li>Lennart Karl OUT (muscle tear during training) — CB depth affected</li>
+          <li>Manuel Neuer (40) — calf strain, may not start; Marc-Andre ter Stegen backup</li>
+          <li>Musiala broken leg at Club World Cup — fitness for opener uncertain</li>
+          <li>Germany lack a world-class out-and-out striker — depth at CF is a concern</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Win & Goals Combo</div>
+          <div class="bet-selection">BET: Germany Win & Over 2.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.0u | Largest quality gap in Round 1; Curacao cannot defend for 90 minutes at this level</div>
+        </div>
+        <div class="bet-odds-badge">1.65</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Asian Handicap</div>
+          <div class="bet-selection">BET: Germany -2.5 AH</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Germany expected to win by 3+ goals vs weakest team in the tournament</div>
+        </div>
+        <div class="bet-odds-badge">1.90</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP E — JUNE 14</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 10 | Sun Jun 14 | 19:00 ET</span>
+    <span class="match-venue">Lincoln Financial Field, Philadelphia, Pennsylvania</span>
+    <span class="conf-badge conf-m">MEDIUM</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Ivory Coast</div>
+        <div class="team-sub">CAF | First WC since 2014</div>
+        <div class="team-sub">Pace on wings; defensively vulnerable</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Ecuador</div>
+        <div class="team-sub">CONMEBOL | Finished above Brazil & Colombia</div>
+        <div class="team-sub">Moises Caicedo (Chelsea) — elite midfield</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Ivory Coast (1)</div><div class="odds-value">3.00</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.30</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Ecuador (2)</div><div class="odds-value">2.05</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.20</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.85</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Ecuador's Credentials</h4>
+        <ul>
+          <li>Qualified above Brazil AND Colombia in CONMEBOL — genuine achievement</li>
+          <li>Moises Caicedo (Chelsea) — Premier League-quality midfielder dominates</li>
+          <li>Disciplined, organized, experienced at tournament pressure</li>
+          <li>Ecuador's CONMEBOL form is a far stronger qualifying test than CAF</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Ivory Coast Return</h4>
+        <ul>
+          <li>First World Cup since 2014 — tournament rust and nerves factor in</li>
+          <li>Pace on the wings could trouble Ecuador if they get space</li>
+          <li>12-year absence from WC creates uncertainty about tournament mentality</li>
+          <li>This is effectively a Group E elimination decider for 3rd-place slot</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Ecuador Win (2)</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Caicedo's quality + CONMEBOL pedigree (beat Brazil & Colombia) decisive</div>
+        </div>
+        <div class="bet-odds-badge">2.05</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Both sides cautious; Ecuador play conservatively to protect lead</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GROUP F ══ -->
+<div class="section-title">Group F — Netherlands, Japan, Sweden, Tunisia</div>
+
+<div class="group-label">GROUP F — JUNE 14</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 11 | Sun Jun 14 | 16:00 ET</span>
+    <span class="match-venue">AT&T Stadium, Arlington (Dallas), Texas</span>
+    <span class="conf-badge conf-m">MEDIUM</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Netherlands</div>
+        <div class="team-sub">UEFA | Van Dijk, Gravenberch, Gakpo</div>
+        <div class="team-sub">2022 Quarter-Finalists; Tournament favorites</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Japan</div>
+        <div class="team-sub">AFC | Beat Germany & Spain in 2022</div>
+        <div class="team-sub">Beat England 1-0 at Wembley (recent friendly)</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Netherlands (1)</div><div class="odds-value">1.65</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.80</div></div>
+      <div class="odds-item"><div class="odds-label">Japan (2)</div><div class="odds-value">5.50</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.20</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.85</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Japan's Proven Threat</h4>
+        <ul>
+          <li>Beat Germany AND Spain in 2022 group stage — elite-team-beating pedigree</li>
+          <li>Beat England 1-0 at Wembley (friendly) — disciplined defensive organization</li>
+          <li>Endo (Liverpool captain), Kamada, Doan — European-based quality</li>
+          <li>High-press system works best when opponent underestimates them</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Netherlands Strengths</h4>
+        <ul>
+          <li>Van Dijk (Liverpool captain) — aerial dominance and leadership</li>
+          <li>Gravenberch (Liverpool) — outstanding 2025-26 form in midfield</li>
+          <li>Gakpo and Malen provide pace and width in attack</li>
+          <li>Netherlands aware of Japan's upset potential — will not underestimate</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Japan sit deep; Netherlands disciplined; expect 1-0 or 2-0 controlled win</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Match Result</div>
+          <div class="bet-selection">BET: Netherlands Win (1)</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Better individual quality should prevail in controlled fashion</div>
+        </div>
+        <div class="bet-odds-badge">1.65</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP F — JUNE 14</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 12 | Sun Jun 14 | 22:00 ET</span>
+    <span class="match-venue">Estadio BBVA, Monterrey, Mexico</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Sweden</div>
+        <div class="team-sub">UEFA | First WC since 2018</div>
+        <div class="team-sub">Viktor Gyokeres (Sporting CP — 40+ goals in 2025-26)</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Tunisia</div>
+        <div class="team-sub">CAF | Weakest team in Group F</div>
+        <div class="team-sub">Primarily Tunisian league players</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Sweden (1)</div><div class="odds-value">1.57</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.20</div></div>
+      <div class="odds-item"><div class="odds-label">Tunisia (2)</div><div class="odds-value">6.50</div></div>
+      <div class="odds-item"><div class="odds-label">Gyokeres Anytime</div><div class="odds-value">1.90</div></div>
+      <div class="odds-item"><div class="odds-label">Over 1.5</div><div class="odds-value">1.40</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Gyokeres Factor</h4>
+        <ul>
+          <li>Viktor Gyokeres — one of the best strikers in European football in 2025-26</li>
+          <li>40+ goals across all competitions for Sporting CP this season</li>
+          <li>Will be one of the most watched players in this tournament</li>
+          <li>Tunisia's defenders play mostly in the Tunisian league — elite pace mismatch</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Sweden Motivation</h4>
+        <ul>
+          <li>First World Cup since 2018 (Zlatan's era) — squad playing for their legacy</li>
+          <li>Gyokeres wants to make a statement on biggest stage</li>
+          <li>Sweden will push for comfortable win to boost goal difference</li>
+          <li>Tunisia cannot match Sweden technically, physically, or tactically</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Sweden Win (1)</div>
+          <div class="bet-meta">HIGH | 2.0u | Gyokeres vs Tunisian defenders is the most extreme individual mismatch in Round 1</div>
+        </div>
+        <div class="bet-odds-badge">1.57</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Over 1.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.0u | Sweden will score multiple times; near-certainty at these odds</div>
+        </div>
+        <div class="bet-odds-badge">1.40</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Top Value Pick</div>
+          <div class="bet-selection">BET: Viktor Gyokeres Anytime Scorer</div>
+          <div class="bet-meta">MEDIUM | 1.5u | 40+ goals this season; opponent is accessible; best scorer value on the card</div>
+        </div>
+        <div class="bet-odds-badge">1.90</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ GROUP G ══ -->
+<div class="section-title">Group G — Belgium, Egypt, Iran, New Zealand</div>
+
+<div class="group-label">GROUP G — JUNE 15</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 13 | Mon Jun 15 | 18:00 ET</span>
+    <span class="match-venue">Lumen Field, Seattle, Washington</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Belgium</div>
+        <div class="team-sub">UEFA | De Bruyne, Lukaku, Doku</div>
+        <div class="team-sub">R16 exit at Euro 2024; last major chance</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Egypt</div>
+        <div class="team-sub">CAF | Mohamed Salah (33-34) leads</div>
+        <div class="team-sub">Organized defense; counter-attack specialists</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Belgium (1)</div><div class="odds-value">1.45</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.20</div></div>
+      <div class="odds-item"><div class="odds-label">Egypt (2)</div><div class="odds-value">7.50</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.10</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.95</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Belgium's Quality</h4>
+        <ul>
+          <li>De Bruyne (Man City) — still one of the world's best creative midfielders</li>
+          <li>Lukaku (AC Milan return) rejuvenated; experienced at major tournaments</li>
+          <li>Doku (Man City) — electric pace on the wing; Egypt's LB will struggle</li>
+          <li>Belgium's golden generation motivated — this is their last realistic chance</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Egypt's Setup</h4>
+        <ul>
+          <li>Salah — devastating on the counter-attack even at 33-34</li>
+          <li>Egypt will defend deep in 4-5-1, look to hit on transition through Salah</li>
+          <li>Belgium must avoid giving Salah space to run — this is their primary risk</li>
+          <li>Egypt's squad beyond Salah is significantly below European standard</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Belgium Win (1)</div>
+          <div class="bet-meta">HIGH | 2.0u | De Bruyne + Lukaku + Doku vs an Egypt side relying primarily on Salah</div>
+        </div>
+        <div class="bet-odds-badge">1.45</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Egypt sit deep; Belgium work hard for goals; 1-0 or 2-0 most likely</div>
+        </div>
+        <div class="bet-odds-badge">1.95</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Anytime Scorer</div>
+          <div class="bet-selection">BET: Mohamed Salah Anytime</div>
+          <div class="bet-meta">SPECULATIVE | 1.0u (max) | Still dangerous on the counter; a consolation or shock goal is plausible</div>
+        </div>
+        <div class="bet-odds-badge">2.75</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP G — JUNE 15/16</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 14 | Mon Jun 15 | 24:00 ET</span>
+    <span class="match-venue">SoFi Stadium, Inglewood (Los Angeles), California</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Iran</div>
+        <div class="team-sub">AFC | Tijuana base (geopolitical)</div>
+        <div class="team-sub">Bundesliga/European-based squad; organized</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">New Zealand</div>
+        <div class="team-sub">OFC | Weakest team in Group G</div>
+        <div class="team-sub">Primarily A-League players; massive quality gap</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Iran (1)</div><div class="odds-value">1.30</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">5.00</div></div>
+      <div class="odds-item"><div class="odds-label">New Zealand (2)</div><div class="odds-value">10.00</div></div>
+      <div class="odds-item"><div class="odds-label">Iran -1.5 AH</div><div class="odds-value">1.75</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Key Factors</h4>
+        <ul>
+          <li>Iran's unusual Tijuana base (geopolitical visa issues) is minor disruption</li>
+          <li>Iran have Bundesliga and European-based players throughout the squad</li>
+          <li>New Zealand qualified through OFC — the weakest qualifying path</li>
+          <li>A-League standard players face massive step up to World Cup level</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Betting Rationale</h4>
+        <ul>
+          <li>Iran at 1.30 is high-certainty; large stake justified</li>
+          <li>Iran -1.5 AH at 1.75 adds value if confident in 2-goal margin</li>
+          <li>New Zealand have barely any realistic path to even a draw</li>
+          <li>Tijuana base is not a significant handicap for Iran's preparation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Iran Win (1)</div>
+          <div class="bet-meta">HIGH | 2.5u | Near-certainty; Iran are massively superior to New Zealand in every area</div>
+        </div>
+        <div class="bet-odds-badge">1.30</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Asian Handicap</div>
+          <div class="bet-selection">BET: Iran -1.5 AH</div>
+          <div class="bet-meta">MEDIUM | 1.0u | Iran expected to win comfortably; -1.5 adds value at 1.75</div>
+        </div>
+        <div class="bet-odds-badge">1.75</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GROUP H ══ -->
+<div class="section-title">Group H — Spain, Uruguay, Cape Verde, Saudi Arabia</div>
+
+<div class="group-label">GROUP H — JUNE 15</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 15 | Mon Jun 15 | 13:00 ET</span>
+    <span class="match-venue">Mercedes-Benz Stadium, Atlanta, Georgia</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Spain</div>
+        <div class="team-sub">UEFA | FIFA #1 | Tournament Favorites +450</div>
+        <div class="team-sub">Yamal, Pedri, Gavi, Fabian Ruiz | 21G-2C in qualifying</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Cape Verde</div>
+        <div class="team-sub">CAF | Organized; plays 4-5-1 block</div>
+        <div class="team-sub">Portuguese/lower-tier European league players</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Spain Win & O1.5</div><div class="odds-value">1.45</div></div>
+      <div class="odds-item"><div class="odds-label">Spain ML</div><div class="odds-value">1.20</div></div>
+      <div class="odds-item"><div class="odds-label">Spain -1.5 AH</div><div class="odds-value">1.60</div></div>
+      <div class="odds-item"><div class="odds-label">Yamal Anytime</div><div class="odds-value">2.40</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Spain's Dominance</h4>
+        <ul>
+          <li>FIFA World #1 — tournament favorites at +420-+450</li>
+          <li>Qualifying record: 21 goals scored, only 2 conceded — extraordinary</li>
+          <li>Lamine Yamal (18) — already a world superstar; his first World Cup</li>
+          <li>Pedri, Gavi, Fabian Ruiz — deepest midfield in the tournament</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Value Angles</h4>
+        <ul>
+          <li>Spain may manage minutes with Uruguay next — but still expect 2-3 goals</li>
+          <li>Win & Over 1.5 at 1.45 removes only scenario Spain score just 1</li>
+          <li>Yamal at 2.40 anytime scorer — elite winger vs Cape Verde defenders</li>
+          <li>Spain -1.5 AH at 1.60 is strong value for a 2+ goal margin prediction</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Win & Goals Combo</div>
+          <div class="bet-selection">BET: Spain Win & Over 1.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.5u | World #1 vs Cape Verde is one of the most one-sided matches of Round 1</div>
+        </div>
+        <div class="bet-odds-badge">1.45</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Asian Handicap</div>
+          <div class="bet-selection">BET: Spain -1.5 AH</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Spain should win by 2+ goals against Cape Verde</div>
+        </div>
+        <div class="bet-odds-badge">1.60</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Anytime Scorer</div>
+          <div class="bet-selection">BET: Lamine Yamal Anytime</div>
+          <div class="bet-meta">SPECULATIVE | 1.0u (max) | 18-year-old superstar hungry to perform; best speculative value today</div>
+        </div>
+        <div class="bet-odds-badge">2.40</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP H — JUNE 15</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 16 | Mon Jun 15 | 18:00 ET</span>
+    <span class="match-venue">Hard Rock Stadium, Miami Gardens, Florida</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Saudi Arabia</div>
+        <div class="team-sub">AFC | Stunned Argentina 2-0 in 2022</div>
+        <div class="team-sub">Saudi Pro League exposure; new generation</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Uruguay</div>
+        <div class="team-sub">CONMEBOL | Bielsa | Darwin Nunez (Liverpool)</div>
+        <div class="team-sub">Federico Valverde (Real Madrid); defensive tradition</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Saudi Arabia (1)</div><div class="odds-value">5.50</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.80</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Uruguay (2)</div><div class="odds-value">1.72</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.85</div></div>
+      <div class="odds-item"><div class="odds-label">Nunez Anytime</div><div class="odds-value">2.40</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Uruguay's Class</h4>
+        <ul>
+          <li>Darwin Nunez (Liverpool) — elite PL-quality striker in prime; ~£85m signing</li>
+          <li>Federico Valverde (Real Madrid, UCL winner) — world-class midfielder</li>
+          <li>Uruguay's defensive tradition under Bielsa remains intact</li>
+          <li>CONMEBOL qualifying alongside Argentina proves real quality</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Saudi Arabia Reality Check</h4>
+        <ul>
+          <li>2022 upset vs Argentina was partly tactical genius + Argentine overconfidence</li>
+          <li>Saudi Pro League veterans (Ronaldo, Benzema) past their peak internationally</li>
+          <li>Saudi domestic players face big step up vs Valverde, Nunez</li>
+          <li>Playing in Miami (neutral) — no home advantage factor unlike 2022</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Uruguay Win (2)</div>
+          <div class="bet-meta">HIGH | 2.0u | Nunez + Valverde quality decisive vs Saudi side without their 2022 home-field magic</div>
+        </div>
+        <div class="bet-odds-badge">1.72</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Uruguay will be conservative; Saudi Arabia will defend deep</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Anytime Scorer</div>
+          <div class="bet-selection">BET: Darwin Nunez Anytime</div>
+          <div class="bet-meta">SPECULATIVE | 1.0u (max) | Premier League-quality striker at ~£85m vs Saudi defenders</div>
+        </div>
+        <div class="bet-odds-badge">2.40</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ GROUP I ══ -->
+<div class="section-title">Group I — France, Norway, Senegal, Iraq</div>
+
+<div class="group-label">GROUP I — JUNE 16</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 17 | Tue Jun 16 | 15:00 ET</span>
+    <span class="match-venue">MetLife Stadium, East Rutherford, New Jersey</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">France <span class="note-tag">DOUBT</span></div>
+        <div class="team-sub">UEFA | Co-Favorites +475 | Deschamps</div>
+        <div class="team-sub" style="color:#ff8a80">Saliba doubt (Arsenal CB). Ekitike OUT (Achilles). Mbappe fitness niggles.</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Senegal <span class="injury-tag">DOUBTS</span></div>
+        <div class="team-sub">CAF | AFCON Champions | Mane leads</div>
+        <div class="team-sub" style="color:#ff8a80">Koulibaly doubt (CB), Sarr absent (winger), Jakobs injury concern</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">France (1)</div><div class="odds-value">1.44</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.50</div></div>
+      <div class="odds-item"><div class="odds-label">Senegal (2)</div><div class="odds-value">7.50</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.10</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.95</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>France's Conservative Opener Pattern</h4>
+        <ul>
+          <li>France historically underperform in tournament openers (2002 vs Senegal: lost 1-0)</li>
+          <li>Deschamps plays very conservatively in first group games</li>
+          <li>Mbappe injury niggles may limit his involvement/intensity</li>
+          <li>Dembele (Ballon d'Or), Olise (Bayern), Doue — extraordinary depth available</li>
+          <li>Saliba doubt weakens France's defensive cohesion if he misses</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Senegal Absences</h4>
+        <ul>
+          <li>Sarr unavailable — removes key wide creative threat from Senegal</li>
+          <li>Koulibaly fitness doubt — anchors their defensive line and aerial threat</li>
+          <li>Jakobs injury concern — left-back position affected</li>
+          <li>Mane still leads — but a weakened Senegal attack limits BTTS probability</li>
+          <li>History note: Senegal beat defending-champion France 1-0 in 2002</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Totals (TOP VALUE PICK)</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.0u | France conservative opener; Senegal attack weakened by absences; 1-0 or 2-0 most likely</div>
+        </div>
+        <div class="bet-odds-badge">1.95</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Match Result</div>
+          <div class="bet-selection">BET: France Win (1)</div>
+          <div class="bet-meta">MEDIUM | 1.5u | France quality superior despite Saliba doubt; Dembele/Olise/Doue provide depth</div>
+        </div>
+        <div class="bet-odds-badge">1.44</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — BTTS</div>
+          <div class="bet-selection">BET: BTTS No</div>
+          <div class="bet-meta">MEDIUM | 1.0u | Senegal without Sarr and potentially Koulibaly are toothless in attack</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP I — JUNE 16</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 18 | Tue Jun 16 | 18:00 ET</span>
+    <span class="match-venue">Gillette Stadium, Foxborough, Massachusetts</span>
+    <span class="conf-badge conf-vh">VERY HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Iraq</div>
+        <div class="team-sub">AFC | First WC since 1986 (40-year absence)</div>
+        <div class="team-sub">Historic occasion; Asian league standard</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Norway</div>
+        <div class="team-sub">UEFA | Haaland's World Cup debut | Unbeaten qualifying</div>
+        <div class="team-sub">Haaland: 16 goals in 8 WC qualifying games</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Iraq (1)</div><div class="odds-value">14.00</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">6.25</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Norway (2)</div><div class="odds-value">1.23</div></div>
+      <div class="odds-item"><div class="odds-label">Haaland Anytime</div><div class="odds-value">1.55</div></div>
+      <div class="odds-item"><div class="odds-label">Norway Win & O1.5</div><div class="odds-value">1.35</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Haaland's World Cup Debut</h4>
+        <ul>
+          <li>Erling Haaland — scored 16 goals in 8 WC qualifying games (twice any rival)</li>
+          <li>Making his World Cup debut at peak powers (Man City, Ballon d'Or contender)</li>
+          <li>Odegaard (Arsenal captain) provides elite creative support</li>
+          <li>Norway went through entire qualifying campaign without a single defeat</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Iraq's Situation</h4>
+        <ul>
+          <li>First World Cup appearance since 1986 — remarkable 40-year gap</li>
+          <li>Lions of Mesopotamia have organized squad but massive quality deficit</li>
+          <li>Players primarily in Asian leagues — cannot match Norway's European quality</li>
+          <li>Norway's press will overwhelm Iraq's ability to build from the back</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result (TOP VALUE PICK)</div>
+          <div class="bet-selection">BET: Norway Win (2)</div>
+          <div class="bet-meta">VERY HIGH | 3.0u | Haaland World Cup debut vs team absent since 1986 — most straightforward pick of Round 1</div>
+        </div>
+        <div class="bet-odds-badge">1.23</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Anytime Scorer (TOP VALUE PICK)</div>
+          <div class="bet-selection">BET: Haaland Anytime Scorer</div>
+          <div class="bet-meta">HIGH | 2.0u | Scored in 6 of 8 qualifying matches; Iraq cannot contain him — best value scorer pick</div>
+        </div>
+        <div class="bet-odds-badge">1.55</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Win & Goals Combo</div>
+          <div class="bet-selection">BET: Norway Win & Over 1.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.0u | Norway will score multiple times; near-certainty</div>
+        </div>
+        <div class="bet-odds-badge">1.35</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GROUP J ══ -->
+<div class="section-title">Group J — Argentina, Austria, Algeria, Jordan</div>
+
+<div class="group-label">GROUP J — JUNE 16</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 19 | Tue Jun 16 | 21:00 ET</span>
+    <span class="match-venue">Arrowhead Stadium, Kansas City, Missouri</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Argentina <span class="note-tag">MESSI?</span></div>
+        <div class="team-sub">CONMEBOL | Reigning Champions | Scaloni</div>
+        <div class="team-sub" style="color:#ff8a80">Messi hamstring strain (May 26); individual exercises, progress made</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Algeria</div>
+        <div class="team-sub">CAF | AFCON Champions | Amoura (Wolfsburg)</div>
+        <div class="team-sub">Compact tactical structure; organized defense</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Argentina (1)</div><div class="odds-value">1.41</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.50</div></div>
+      <div class="odds-item"><div class="odds-label">Algeria (2)</div><div class="odds-value">9.00</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.95</div></div>
+      <div class="odds-item"><div class="odds-label">ARG Win & BTTS No</div><div class="odds-value">2.10</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Messi Situation</h4>
+        <ul>
+          <li>Muscular overload / hamstring strain suffered May 26 at Inter Miami</li>
+          <li>Argentina cautiously optimistic; individual exercises Jun 2-5</li>
+          <li>Scaloni may protect Messi in the opener if not 100% fit</li>
+          <li>Even without Messi: Lautaro (Inter), Enzo (Chelsea), Mac Allister (LFC), Alvarez — world-class depth</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Argentina's System</h4>
+        <ul>
+          <li>Reigning World Cup champions — structured, disciplined, never overextend</li>
+          <li>Scaloni's conservative opener approach is well-documented</li>
+          <li>Algeria are AFCON champions but CONMEBOL/UEFA standard is significantly higher</li>
+          <li>Algeria's Amoura (Wolfsburg) is their lone European-quality attacker</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Argentina Win (1)</div>
+          <div class="bet-meta">HIGH | 2.0u | Reigning champions with world-class depth; Algeria cannot match their quality even without Messi</div>
+        </div>
+        <div class="bet-odds-badge">1.41</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Argentina conservative opener; Algeria will defend deep; Messi caution amplifies</div>
+        </div>
+        <div class="bet-odds-badge">1.95</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP J — JUNE 16/17</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 20 | Tue Jun 16 | 24:00 ET</span>
+    <span class="match-venue">Levi's Stadium, Santa Clara (San Francisco Bay Area), California</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Austria</div>
+        <div class="team-sub">UEFA | Alaba (Real Madrid), Sabitzer, Arnautovic</div>
+        <div class="team-sub">Solid European mid-tier; qualified well</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Jordan</div>
+        <div class="team-sub">AFC | First-ever World Cup</div>
+        <div class="team-sub">Historic achievement; significant quality gap</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Austria (1)</div><div class="odds-value">1.28</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">5.50</div></div>
+      <div class="odds-item"><div class="odds-label">Jordan (2)</div><div class="odds-value">12.00</div></div>
+      <div class="odds-item"><div class="odds-label">Austria -1.5 AH</div><div class="odds-value">1.70</div></div>
+      <div class="odds-item"><div class="odds-label">BTTS No</div><div class="odds-value">1.62</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Why Austria Win Comfortably</h4>
+        <ul>
+          <li>Jordan are first-time World Cup participants — preparation at this level is new</li>
+          <li>Austria's squad plays in PL, Bundesliga, Serie A — Sabitzer at Man United</li>
+          <li>Alaba (Real Madrid) returning from injury adds CL-level leadership at CB</li>
+          <li>Jordan's squad plays primarily in the Jordan national league</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Betting Value</h4>
+        <ul>
+          <li>Austria at 1.28 is high-certainty; warrants larger stake</li>
+          <li>Austria -1.5 AH at 1.70 is the best return for an expected comfortable win</li>
+          <li>BTTS No at 1.62 is well-supported — Jordan attack extremely limited</li>
+          <li>Jordan will defend deep to survive; Austria need patience to break them</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: Austria Win (1)</div>
+          <div class="bet-meta">HIGH | 2.5u | Jordan first-time WC participants vs European mid-tier professionals — clear quality gap</div>
+        </div>
+        <div class="bet-odds-badge">1.28</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Asian Handicap</div>
+          <div class="bet-selection">BET: Austria -1.5 AH</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Austria should win by 2+ goals against Jordan</div>
+        </div>
+        <div class="bet-odds-badge">1.70</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — BTTS</div>
+          <div class="bet-selection">BET: BTTS No</div>
+          <div class="bet-meta">MEDIUM | 1.0u | Jordan's attacking threat is extremely limited against Austria's organized defense</div>
+        </div>
+        <div class="bet-odds-badge">1.62</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ GROUP K ══ -->
+<div class="section-title">Group K — Portugal, Colombia, DR Congo, Uzbekistan</div>
+
+<div class="group-label">GROUP K — JUNE 17</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 21 | Wed Jun 17 | 13:00 ET</span>
+    <span class="match-venue">NRG Stadium, Houston, Texas</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Portugal <span class="note-tag">RONALDO</span></div>
+        <div class="team-sub">UEFA | Tournament Favorites +850 | Martinez</div>
+        <div class="team-sub" style="color:#ffd600">Ronaldo (41) — hamstring strain (Feb). Fabrizio Romano: back available. Bruno, Bernardo, Leao all fit.</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">DR Congo</div>
+        <div class="team-sub">CAF | Long absence from WC; physical threat</div>
+        <div class="team-sub">Pace and physicality could disrupt early</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">Portugal (1)</div><div class="odds-value">1.47</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.50</div></div>
+      <div class="odds-item"><div class="odds-label">DR Congo (2)</div><div class="odds-value">9.00</div></div>
+      <div class="odds-item"><div class="odds-label">Portugal -0.5 AH</div><div class="odds-value">1.60</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.90</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Portugal's Depth</h4>
+        <ul>
+          <li>Bruno Fernandes (Man United captain) — elite creative force even without Ronaldo</li>
+          <li>Bernardo Silva (Man City) — tournament-level quality and experience</li>
+          <li>Rafael Leao (AC Milan) — pace and direct threat from the left</li>
+          <li>Ronaldo reportedly available per Fabrizio Romano — but minutes managed</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>DR Congo Wildcard</h4>
+        <ul>
+          <li>Physical pace and press can create early problems before Portugal adapt</li>
+          <li>Long World Cup absence means no recent precedent at this level</li>
+          <li>Martinez's Portugal are tournament-tested and will adapt quickly</li>
+          <li>DR Congo attack: pace runners but limited technical quality vs Portugal CB</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Asian Handicap</div>
+          <div class="bet-selection">BET: Portugal -0.5 AH</div>
+          <div class="bet-meta">HIGH | 2.0u | Removes draw risk; Portugal's squad quality is decisive vs DR Congo</div>
+        </div>
+        <div class="bet-odds-badge">1.60</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Portugal conservative opener; DR Congo will defend deep after initial press</div>
+        </div>
+        <div class="bet-odds-badge">1.90</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP K — JUNE 17</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 22 | Wed Jun 17 | 22:00 ET</span>
+    <span class="match-venue">Estadio Azteca, Mexico City, Mexico (altitude)</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Uzbekistan</div>
+        <div class="team-sub">AFC | First-ever World Cup</div>
+        <div class="team-sub">Primarily Uzbek/Russian/Turkish league players</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Colombia</div>
+        <div class="team-sub">CONMEBOL | Luis Diaz (Liverpool), James Rodriguez</div>
+        <div class="team-sub">Qualified alongside Argentina from CONMEBOL</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Uzbekistan (1)</div><div class="odds-value">7.50</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">4.50</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Colombia (2)</div><div class="odds-value">1.40</div></div>
+      <div class="odds-item"><div class="odds-label">Colombia Win & O1.5</div><div class="odds-value">1.58</div></div>
+      <div class="odds-item"><div class="odds-label">Diaz Anytime</div><div class="odds-value">2.60</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Colombia's Quality</h4>
+        <ul>
+          <li>Luis Diaz (Liverpool) — elite PL winger; one of South America's best</li>
+          <li>James Rodriguez (2014 Golden Boot) at peak World Cup motivation</li>
+          <li>Qualified alongside Argentina in CONMEBOL — proven under pressure</li>
+          <li>Azteca altitude (2,240m) may actually benefit Colombia's athletic players</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Uzbekistan's Situation</h4>
+        <ul>
+          <li>First-ever World Cup appearance — preparation challenge at this level</li>
+          <li>Squad plays in Uzbek Super League, Russian Premier League, Turkish Super Lig</li>
+          <li>Massive quality gap vs Premier League and CONMEBOL-tested Colombia</li>
+          <li>Azteca altitude adds additional challenge for first-time WC participants</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Win & Goals Combo</div>
+          <div class="bet-selection">BET: Colombia Win & Over 1.5 Goals</div>
+          <div class="bet-meta">HIGH | 2.0u | Diaz + James vs first-time WC participants — Colombia will score multiple goals</div>
+        </div>
+        <div class="bet-odds-badge">1.58</div>
+      </div>
+      <div class="bet-rec speculative">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Speculative — Anytime Scorer</div>
+          <div class="bet-selection">BET: Luis Diaz Anytime Scorer</div>
+          <div class="bet-meta">SPECULATIVE | 1.0u (max) | Elite Liverpool winger vs Uzbek defense — great value at 2.60</div>
+        </div>
+        <div class="bet-odds-badge">2.60</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ GROUP L ══ -->
+<div class="section-title">Group L — England, Croatia, Ghana, Panama</div>
+
+<div class="group-label">GROUP L — JUNE 17</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 23 | Wed Jun 17 | 16:00 ET</span>
+    <span class="match-venue">AT&T Stadium, Arlington (Dallas), Texas</span>
+    <span class="conf-badge conf-h">HIGH</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">England</div>
+        <div class="team-sub">UEFA | Tuchel | Kane, Saka, Bellingham</div>
+        <div class="team-sub">4/6 wins in recent H2H vs Croatia; -138 favs</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div><div class="match-time-small">2018 WC Semi-Final rematch</div></div>
+      <div class="team-block">
+        <div class="team-name">Croatia</div>
+        <div class="team-sub">UEFA | Modric (38-39) still leads but ageing</div>
+        <div class="team-sub">2018 Finalists; 2022 3rd place; past peak</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item odds-fav"><div class="odds-label">England (1)</div><div class="odds-value">1.72</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.70</div></div>
+      <div class="odds-item"><div class="odds-label">Croatia (2)</div><div class="odds-value">4.75</div></div>
+      <div class="odds-item"><div class="odds-label">Under 2.5</div><div class="odds-value">1.85</div></div>
+      <div class="odds-item"><div class="odds-label">England Win to Nil</div><div class="odds-value">2.40</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>England's Advantages</h4>
+        <ul>
+          <li>Harry Kane (Bayern Munich) — Bundesliga top scorer; all-time England record goalscorer</li>
+          <li>Bukayo Saka — most reliable English creator; pace and end product vs ageing Croatian LB</li>
+          <li>Jude Bellingham (Real Madrid) — arrives late into box; Croatia's aging midfield cannot track</li>
+          <li>England won 4 of last 6 H2H meetings against Croatia</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Croatia's Decline</h4>
+        <ul>
+          <li>Modric (38-39) cannot control midfield vs Bellingham's energy for 90 minutes</li>
+          <li>Croatia's Golden Generation has given way — squad quality below 2018/2022 peak</li>
+          <li>Kovacic (Man City), Gvardiol (Man City) remain quality but surrounded by less quality</li>
+          <li>England won the most recent World Cup rematch preparation match</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Match Result</div>
+          <div class="bet-selection">BET: England Win (1)</div>
+          <div class="bet-meta">HIGH | 2.0u | Kane, Saka, Bellingham vs an ageing Croatia midfield — England should control this</div>
+        </div>
+        <div class="bet-odds-badge">1.72</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">HIGH | 1.5u | Croatia defend conservatively; England methodical; 1-0 or 2-0 the most likely outcome</div>
+        </div>
+        <div class="bet-odds-badge">1.85</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Win to Nil (TOP VALUE)</div>
+          <div class="bet-selection">BET: England Win to Nil</div>
+          <div class="bet-meta">MEDIUM | 1.0u | Croatia's ageing attack unlikely to breach Tuchel's organized England defense; best value price</div>
+        </div>
+        <div class="bet-odds-badge">2.40</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group-label">GROUP L — JUNE 17</div>
+<div class="match-card">
+  <div class="match-header">
+    <span class="match-number">Match 24 | Wed Jun 17 | 19:00 ET</span>
+    <span class="match-venue">BMO Field, Toronto, Canada</span>
+    <span class="conf-badge conf-m">MEDIUM</span>
+  </div>
+  <div class="match-body">
+    <div class="match-teams">
+      <div class="team-block">
+        <div class="team-name">Ghana</div>
+        <div class="team-sub">CAF | Queiroz's defensive setup | Rank ~73</div>
+        <div class="team-sub">Jordan Ayew leads; European-based core</div>
+      </div>
+      <div class="vs-block"><div class="vs-text">VS</div></div>
+      <div class="team-block">
+        <div class="team-name">Panama</div>
+        <div class="team-sub">CONCACAF | Physically disciplined</div>
+        <div class="team-sub">MLS / Costa Rican / Mexican league players</div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds-item"><div class="odds-label">Ghana (1)</div><div class="odds-value">2.15</div></div>
+      <div class="odds-item"><div class="odds-label">Draw (X)</div><div class="odds-value">3.10</div></div>
+      <div class="odds-item"><div class="odds-label">Panama (2)</div><div class="odds-value">3.60</div></div>
+      <div class="odds-item"><div class="odds-label">Over 2.5</div><div class="odds-value">2.50</div></div>
+      <div class="odds-item odds-fav"><div class="odds-label">Under 2.5</div><div class="odds-value">1.80</div></div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <h4>Why Under 2.5</h4>
+        <ul>
+          <li>Both teams know this match is effectively do-or-die for 3rd-place advancement</li>
+          <li>Queiroz (Ghana) is famous for defensive pragmatism — will not take risks</li>
+          <li>Panama organize physically and rely on set-pieces rather than open play</li>
+          <li>Neither team has the quality to consistently break down organized defenses</li>
+        </ul>
+      </div>
+      <div class="analysis-box">
+        <h4>Match Context</h4>
+        <ul>
+          <li>In a group with England (major favorites to win Group L), neither team can afford a loss</li>
+          <li>Draw at 3.10 is plausible — conservative approach suits both managers</li>
+          <li>Ghana have slight quality edge through Ayew, European-based players</li>
+          <li>Toronto neutral venue — neither team has crowd advantage</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bet-recs">
+      <div class="bet-rec primary">
+        <div class="bet-icon">★</div>
+        <div class="bet-details">
+          <div class="bet-market">Primary — Totals</div>
+          <div class="bet-selection">BET: Under 2.5 Goals</div>
+          <div class="bet-meta">MEDIUM | 1.5u | Both teams adopt defensive-first approach; conservative managers and pragmatic setups</div>
+        </div>
+        <div class="bet-odds-badge">1.80</div>
+      </div>
+      <div class="bet-rec secondary">
+        <div class="bet-icon">+</div>
+        <div class="bet-details">
+          <div class="bet-market">Secondary — Draw Insurance</div>
+          <div class="bet-selection">BET: Draw (X)</div>
+          <div class="bet-meta">LOW | 1.0u | Speculative; draw is the most likely single outcome given even quality and defensive setups</div>
+        </div>
+        <div class="bet-odds-badge">3.10</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ SUMMARY TABLE ══ -->
+<div class="section-title">Betting Recommendations Summary — All 24 Matches</div>
+<table class="summary-table">
+  <thead>
+    <tr><th>Match</th><th>Primary Bet</th><th>Odds</th><th>Confidence</th><th>Stake</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mexico vs South Africa</td><td>Mexico Win (1)</td><td>1.48</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>South Korea vs Czechia</td><td>Draw (X)</td><td>2.80</td><td class="conf-med">MEDIUM</td><td>1.5u</td></tr>
+    <tr><td>Canada vs Bosnia-Herz.</td><td>Draw (X)</td><td>3.00</td><td class="conf-med">MEDIUM</td><td>1.5u</td></tr>
+    <tr><td>Qatar vs Switzerland</td><td>Switzerland Win & Over 1.5</td><td>1.55</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Brazil vs Morocco</td><td>Brazil Win (1)</td><td>1.57</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Haiti vs Scotland</td><td>Scotland -0.5 AH</td><td>1.65</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>USA vs Paraguay</td><td>USA Win (1)</td><td>1.75</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Australia vs Turkey</td><td>Turkey Win (2)</td><td>2.10</td><td class="conf-med">MEDIUM</td><td>1.5u</td></tr>
+    <tr><td>Germany vs Curacao</td><td>Germany Win & Over 2.5</td><td>1.65</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Ivory Coast vs Ecuador</td><td>Ecuador Win (2)</td><td>2.05</td><td class="conf-med">MEDIUM</td><td>1.5u</td></tr>
+    <tr><td>Netherlands vs Japan</td><td>Under 2.5 Goals</td><td>1.85</td><td class="conf-med">MEDIUM</td><td>1.5u</td></tr>
+    <tr><td>Sweden vs Tunisia</td><td>Sweden Win (1)</td><td>1.57</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Belgium vs Egypt</td><td>Belgium Win (1)</td><td>1.45</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Iran vs New Zealand</td><td>Iran Win (1)</td><td>1.30</td><td class="conf-high">HIGH</td><td>2.5u</td></tr>
+    <tr><td>Spain vs Cape Verde</td><td>Spain Win & Over 1.5</td><td>1.45</td><td class="conf-high">HIGH</td><td>2.5u</td></tr>
+    <tr><td>Saudi Arabia vs Uruguay</td><td>Uruguay Win (2)</td><td>1.72</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>France vs Senegal</td><td>Under 2.5 Goals</td><td>1.95</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Iraq vs Norway</td><td>Norway Win (2)</td><td>1.23</td><td class="conf-vh-text">VERY HIGH</td><td>3.0u</td></tr>
+    <tr><td>Argentina vs Algeria</td><td>Argentina Win (1)</td><td>1.41</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Austria vs Jordan</td><td>Austria Win (1)</td><td>1.28</td><td class="conf-high">HIGH</td><td>2.5u</td></tr>
+    <tr><td>Portugal vs DR Congo</td><td>Portugal -0.5 AH</td><td>1.60</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Uzbekistan vs Colombia</td><td>Colombia Win & Over 1.5</td><td>1.58</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>England vs Croatia</td><td>England Win (1)</td><td>1.72</td><td class="conf-high">HIGH</td><td>2.0u</td></tr>
+    <tr><td>Ghana vs Panama</td><td>Under 2.5 Goals</td><td>1.80</td><td class="conf-med">MEDIUM</td><td>1.5u</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════════════════════════════════ TOP 5 PICKS ══ -->
+<div class="section-title">Top 5 Value Picks — Round 1</div>
+<div class="top-picks-grid">
+  <div class="top-pick-card">
+    <div class="top-pick-label">#1 VALUE PICK — VERY HIGH</div>
+    <div class="top-pick-sel">Haaland Anytime Scorer</div>
+    <div class="top-pick-match">Iraq vs Norway | Group I | Jun 16</div>
+    <div class="top-pick-odds">1.55</div>
+    <div class="top-pick-desc">Scored in 6 of 8 WC qualifying games on debut vs a team absent from the WC since 1986. Best scorer value on the entire Round 1 card.</div>
+  </div>
+  <div class="top-pick-card">
+    <div class="top-pick-label">#2 — HIGH | BEST MISMATCH</div>
+    <div class="top-pick-sel">Germany Win & Over 2.5 Goals</div>
+    <div class="top-pick-match">Germany vs Curacao | Group E | Jun 14</div>
+    <div class="top-pick-odds">1.65</div>
+    <div class="top-pick-desc">Largest quality gap in Round 1. Curacao are the smallest nation ever at a World Cup. Germany will score multiple goals even with rotation.</div>
+  </div>
+  <div class="top-pick-card">
+    <div class="top-pick-label">#3 — MEDIUM | BEST SCORER VALUE</div>
+    <div class="top-pick-sel">Viktor Gyokeres Anytime Scorer</div>
+    <div class="top-pick-match">Sweden vs Tunisia | Group F | Jun 14</div>
+    <div class="top-pick-odds">1.90</div>
+    <div class="top-pick-desc">One of Europe's best strikers in 2025-26 (40+ goals) vs Tunisian defenders primarily in the domestic league. Outstanding value at 1.90.</div>
+  </div>
+  <div class="top-pick-card">
+    <div class="top-pick-label">#4 — HIGH | TOTALS VALUE</div>
+    <div class="top-pick-sel">Under 2.5 Goals</div>
+    <div class="top-pick-match">France vs Senegal | Group I | Jun 16</div>
+    <div class="top-pick-odds">1.95</div>
+    <div class="top-pick-desc">France historically conservative in tournament openers. 2002 ghost. Senegal missing Sarr and potentially Koulibaly. 1-0 or 2-0 most likely.</div>
+  </div>
+  <div class="top-pick-card">
+    <div class="top-pick-label">#5 — MEDIUM | BEST WIN-TO-NIL</div>
+    <div class="top-pick-sel">England Win to Nil</div>
+    <div class="top-pick-match">England vs Croatia | Group L | Jun 17</div>
+    <div class="top-pick-odds">2.40</div>
+    <div class="top-pick-desc">Croatia's ageing attack (Modric at 38-39) cannot breach Tuchel's organized England defense. Best price on what should be a clean sheet.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ BANKROLL ══ -->
+<div class="bankroll-box">
+  <h4>Bankroll Management — Round 1 Guidelines</h4>
+  <ul>
+    <li>Total exposure across all 24 primary bets: approximately 48.0u — spread across 5 days (Jun 11-17)</li>
+    <li>VERY HIGH bets (Norway ML): 3.0u max per bet (capped per policy)</li>
+    <li>HIGH bets (most primaries): 2.0-2.5u — only place where all 4+ confirming factors are present</li>
+    <li>MEDIUM bets (draws, underdogs): 1.5u — genuine uncertainty warrants lower exposure</li>
+    <li>SPECULATIVE bets (anytime scorers): Hard cap 1.0u maximum regardless of confidence in match outcome</li>
+    <li>Do NOT parlay the mismatch games (Germany, Norway, Spain, Austria) — they are near-certainties at short prices; single bets only</li>
+    <li>Tournament openers are the most unpredictable phase — apply standard caution to all stakes</li>
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════ DISCLAIMER ══ -->
+<div class="disclaimer">
+  <h3>Responsible Gambling — Important Notice</h3>
+  <p><strong>Disclaimer:</strong> This analysis is for informational and entertainment purposes only. Sports betting involves financial risk and no outcome is guaranteed. This report does not constitute financial advice. Never bet more than you can afford to lose. Past performance does not guarantee future results. All odds quoted were sourced from bet365, FanDuel, BetMGM, and Oddschecker as of June 6, 2026, and may have changed.</p>
+  <br>
+  <p><strong>Data Sources:</strong> Fixtures from ESPN / FIFA.com. Team news and injuries from Yahoo Sports Live Tracker, BBC Sport, Sky Sports, Squawka, RotoWire (June 2-6, 2026). Odds from bet365, FanDuel, BetMGM, Oddschecker, Polymarket, Kalshi (June 6, 2026).</p>
+  <br>
+  <p><strong>If you need help:</strong> USA: 1-800-522-4700 (National Problem Gambling Helpline) | UK: 0808 802 0133 (GamCare) | Canada: 1-866-531-2600 | International: <a href="https://www.begambleaware.org">BeGambleAware.org</a></p>
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
   .profit-neg { color: #f87171; }
 </style>
 </head>
