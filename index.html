@@ -1,387 +1,476 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Koľko nás dnes v office</title>
+<title>Pending Picks — KLOD</title>
 <style>
-  :root{
-    --ink:#1a1f2b;
-    --amber-1:#f0a839;
-    --amber-2:#e8873c;
-    --coral-1:#f0716a;
-    --coral-2:#e2564f;
-    --ok:#3ecf8e;
-    --warn:#f5c744;
-    --bad:#f0554f;
-    --paper:#fff;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:28px 16px;
-    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
-    background:
-      radial-gradient(circle at 15% 10%, rgba(255,255,255,.07), transparent 40%),
-      linear-gradient(155deg, #23283a 0%, #1b1f2e 45%, #14171f 100%);
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #222537;
+    --border: #2e3250;
+    --text: #e8eaf6;
+    --muted: #8b93b0;
+    --accent: #4f8ef7;
+    --green: #2ecc71;
+    --yellow: #f39c12;
+    --red: #e74c3c;
+    --orange: #e67e22;
+    --purple: #9b59b6;
+    --teal: #1abc9c;
   }
 
-  .card{
-    position:relative;
-    width:100%;
-    max-width:620px;
-    border-radius:26px;
-    overflow:hidden;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.55);
-    background:
-      linear-gradient(180deg, rgba(10,12,18,.35) 0%, rgba(10,12,18,.72) 68%, rgba(10,12,18,.86) 100%),
-      repeating-linear-gradient(90deg, #2b3142 0 2px, #262b3a 2px 64px),
-      linear-gradient(160deg, #3a4258, #20242f 70%);
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
-  /* faux office window strip, echoes the pool photo band in the reference */
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0; left:0; right:0;
-    height:46%;
-    background-image:
-      linear-gradient(180deg, rgba(20,23,33,0) 55%, rgba(15,17,25,.55) 100%),
-      repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 46px, rgba(255,255,255,0) 46px 64px);
-    pointer-events:none;
+  .header {
+    background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .header-left h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.3px; }
+  .header-left h1 span { color: var(--accent); }
+  .header-left p { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+  .header-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    padding: 4px 10px; border-radius: 20px; font-size: 0.72rem;
+    font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase;
+  }
+  .badge-live { background: rgba(46,204,113,0.15); color: var(--green); border: 1px solid rgba(46,204,113,0.3); }
+  .badge-games { background: rgba(79,142,247,0.15); color: var(--accent); border: 1px solid rgba(79,142,247,0.3); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+
+  .summary-bar {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin-bottom: 24px;
+  }
+  .summary-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; text-align: center;
+  }
+  .summary-card .val { font-size: 1.6rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .summary-card .lbl {
+    font-size: 0.72rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.5px; margin-top: 4px;
   }
 
-  .content{
-    position:relative;
-    padding:34px 30px 30px;
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 18px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 24px;
+  }
+  .control-group { display: flex; align-items: center; gap: 8px; }
+  .control-group > span {
+    font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .btn {
+    background: var(--surface2); color: var(--muted); border: 1px solid var(--border);
+    border-radius: 7px; padding: 5px 12px; font-size: 0.78rem; font-weight: 600;
+    font-family: inherit; cursor: pointer; transition: all .15s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--text); }
+  .btn.active { background: rgba(79,142,247,0.18); border-color: var(--accent); color: var(--accent); }
+
+  .group-head {
+    display: flex; align-items: baseline; gap: 10px;
+    margin: 26px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .group-head:first-child { margin-top: 0; }
+  .group-head h2 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.2px; }
+  .group-head .count { font-size: 0.75rem; color: var(--muted); }
+  .group-head .units { font-size: 0.75rem; color: var(--muted); margin-left: auto; }
+
+  .section-late h2 { color: var(--orange); }
+  .section-live h2 { color: var(--green); }
+  .section-live h2::before {
+    content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); margin-right: 8px; vertical-align: middle;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+
+  .pick-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .pick-row {
+    display: grid;
+    grid-template-columns: 150px minmax(200px, 1.4fr) minmax(180px, 1.2fr) 74px 64px 92px;
+    align-items: center; gap: 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: 10px; padding: 11px 14px; transition: border-color .15s;
+  }
+  .pick-row:hover { border-color: var(--accent); }
+  .pick-row.late { opacity: .62; border-left-color: var(--orange); }
+  .pick-row.live { border-left-color: var(--green); background: rgba(46,204,113,0.05); }
+  .pick-row.soon { border-left-color: var(--green); }
+  .pick-row.undated { border-left-color: var(--yellow); }
+
+  .cell-label {
+    display: none; font-size: 0.65rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
 
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:#ffd9a0;
-    background:rgba(255,255,255,.08);
-    padding:6px 12px;
-    border-radius:100px;
-    margin-bottom:16px;
-    border:1px solid rgba(255,255,255,.12);
+  .time .clock { font-weight: 700; font-size: 0.95rem; }
+  .time .rel { font-size: 0.72rem; color: var(--muted); }
+  .time .rel.now { color: var(--green); font-weight: 600; }
+  .time .rel.unconfirmed { color: var(--yellow); }
+  .time .raw { font-size: 0.68rem; color: var(--muted); font-style: italic; }
+
+  .fixture .teams { font-weight: 600; }
+  .fixture .meta { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  .sport-pill {
+    display: inline-block; padding: 1px 7px; border-radius: 10px;
+    font-size: 0.64rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.4px; margin-right: 6px;
   }
-  .eyebrow .dot{
-    width:7px;height:7px;border-radius:50%;
-    background:var(--ok);
-    box-shadow:0 0 0 4px rgba(62,207,142,.18);
+  .sport-football { background: rgba(46,204,113,.16); color: var(--green); }
+  .sport-baseball { background: rgba(230,126,34,.16); color: var(--orange); }
+  .sport-nfl      { background: rgba(155,89,182,.16); color: var(--purple); }
+  .sport-hockey   { background: rgba(26,188,156,.16); color: var(--teal); }
+  .sport-tennis   { background: rgba(243,156,18,.16); color: var(--yellow); }
+  .sport-other    { background: rgba(139,147,176,.16); color: var(--muted); }
+
+  .bet .sel { font-weight: 600; color: var(--text); }
+  .bet .mkt { font-size: 0.72rem; color: var(--muted); }
+
+  .odds { font-weight: 700; font-size: 0.95rem; text-align: right; font-variant-numeric: tabular-nums; }
+  .odds .american { display: block; font-size: 0.68rem; color: var(--muted); font-weight: 500; }
+  .stake { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--muted); }
+
+  .conf-badge {
+    padding: 3px 9px; border-radius: 12px; font-size: .68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px; text-align: center; white-space: nowrap;
+  }
+  .conf-very-high { background: rgba(46,204,113,.2);   color: var(--green);  border: 1px solid rgba(46,204,113,.4); }
+  .conf-high      { background: rgba(79,142,247,.2);   color: var(--accent); border: 1px solid rgba(79,142,247,.4); }
+  .conf-medium    { background: rgba(243,156,18,.2);   color: var(--yellow); border: 1px solid rgba(243,156,18,.4); }
+  .conf-low       { background: rgba(231,76,60,.15);   color: var(--red);    border: 1px solid rgba(231,76,60,.3); }
+  .conf-skip      { background: rgba(139,147,176,.15); color: var(--muted);  border: 1px solid rgba(139,147,176,.3); }
+
+  .empty {
+    background: var(--surface); border: 1px dashed var(--border); border-radius: 12px;
+    padding: 48px 24px; text-align: center; color: var(--muted);
+  }
+  .empty strong { display: block; color: var(--text); font-size: 1.05rem; margin-bottom: 6px; }
+
+  .footer {
+    margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.7;
   }
 
-  h1{
-    margin:0 0 26px;
-    color:#fff;
-    font-size:clamp(26px, 5vw, 36px);
-    line-height:1.16;
-    font-weight:800;
-    letter-spacing:-.01em;
-    text-shadow:0 2px 18px rgba(0,0,0,.35);
+  @media (max-width: 860px) {
+    .header { padding: 18px 20px; }
+    .pick-row { grid-template-columns: 1fr 1fr; gap: 8px 14px; }
+    .pick-row > div { min-width: 0; }
+    .cell-label { display: block; }
+    .fixture, .bet { grid-column: 1 / -1; }
+    .odds, .stake { text-align: left; }
   }
-  h1 .wave{ display:inline-block; }
-
-  .panels{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 14px 34px -14px rgba(0,0,0,.5);
-  }
-  @media (max-width:520px){
-    .panels{ grid-template-columns:1fr; }
-  }
-
-  .panel{
-    padding:22px 20px;
-    position:relative;
-  }
-  .panel.people{
-    background:linear-gradient(160deg, var(--amber-1), var(--amber-2));
-  }
-  .panel.status{
-    background:linear-gradient(160deg, var(--coral-1), var(--coral-2));
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-
-  .panel-label{
-    color:rgba(255,255,255,.92);
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:.02em;
-    margin:0 0 10px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .panel-label svg{ flex-shrink:0; opacity:.95; }
-
-  .count-row{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-  .count-row svg{ flex-shrink:0; }
-
-  .count-value{
-    display:flex;
-    align-items:baseline;
-    gap:6px;
-    font-weight:800;
-    color:#fff;
-    font-size:clamp(30px, 6vw, 40px);
-    line-height:1;
-  }
-  .count-value .sep{ opacity:.75; font-weight:700; font-size:.75em; }
-
-  .editable{
-    background:rgba(255,255,255,.16);
-    border:1.5px dashed rgba(255,255,255,.55);
-    border-radius:10px;
-    padding:2px 8px;
-    min-width:1.1em;
-    text-align:center;
-    outline:none;
-    cursor:text;
-    transition:background .15s ease, border-color .15s ease;
-  }
-  .editable:hover{ background:rgba(255,255,255,.24); }
-  .editable:focus{ background:rgba(255,255,255,.3); border-color:#fff; }
-
-  .hint{
-    margin-top:10px;
-    font-size:11.5px;
-    color:rgba(255,255,255,.82);
-    font-weight:600;
-  }
-
-  .status-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    background:rgba(255,255,255,.14);
-    border-radius:12px;
-    padding:10px 12px;
-  }
-  .status-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:#fff;
-    font-weight:700;
-    font-size:14px;
-  }
-  .status-left svg{ flex-shrink:0; }
-
-  .status-pill{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    padding:5px 11px;
-    border-radius:100px;
-    font-size:12px;
-    font-weight:800;
-    color:#1a1f2b;
-    border:none;
-    cursor:pointer;
-    letter-spacing:.01em;
-    transition:transform .12s ease, filter .12s ease;
-    font-family:inherit;
-  }
-  .status-pill:hover{ transform:translateY(-1px); filter:brightness(1.03); }
-  .status-pill:active{ transform:translateY(0); }
-  .status-pill .pdot{
-    width:7px;height:7px;border-radius:50%;
-    background:#1a1f2b;
-  }
-  .status-pill[data-state="ok"]{ background:var(--ok); color:#0b3a26; }
-  .status-pill[data-state="warn"]{ background:var(--warn); color:#4a3900; }
-  .status-pill[data-state="bad"]{ background:var(--bad); color:#4a0d0a; }
-
-  .footer-note{
-    margin-top:16px;
-    text-align:center;
-    font-size:11.5px;
-    color:rgba(255,255,255,.45);
-  }
-  .footer-note button{
-    background:none;
-    border:none;
-    color:rgba(255,255,255,.7);
-    text-decoration:underline;
-    cursor:pointer;
-    font-size:11.5px;
-    font-family:inherit;
-    padding:0;
-  }
-  .footer-note button:hover{ color:#fff; }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="content">
-    <div class="eyebrow"><span class="dot"></span>Live · dnes</div>
-    <h1>Koľko nás dnes<br>v office <span class="wave">👋</span></h1>
-
-    <div class="panels">
-      <div class="panel people">
-        <p class="panel-label">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Počet ľudí v office
-        </p>
-        <div class="count-row">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          <div class="count-value">
-            <span class="editable" id="peopleNow" contenteditable="true" spellcheck="false">7</span>
-            <span class="sep">/</span>
-            <span class="editable" id="peopleMax" contenteditable="true" spellcheck="false">18</span>
-          </div>
-        </div>
-        <div class="hint">klikni na číslo a uprav ✏️</div>
-      </div>
-
-      <div class="panel status">
-        <p class="panel-label" style="margin-bottom:2px;">Prevádzka</p>
-
-        <div class="status-item">
-          <div class="status-left">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Elektrina
-          </div>
-          <button class="status-pill" data-state="ok" data-key="electricity"><span class="pdot"></span><span class="ptext">OK</span></button>
-        </div>
-
-        <div class="status-item">
-          <div class="status-left">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69s-5 6-5 10.5a5 5 0 0 0 10 0c0-4.5-5-10.5-5-10.5z"/></svg>
-            Voda
-          </div>
-          <button class="status-pill" data-state="ok" data-key="water"><span class="pdot"></span><span class="ptext">OK</span></button>
-        </div>
-
-        <div class="status-item">
-          <div class="status-left">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            Káva
-          </div>
-          <button class="status-pill" data-state="warn" data-key="coffee"><span class="pdot"></span><span class="ptext">Málo</span></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-note">Klikni na status a prepni stav · <button id="resetBtn" type="button">reset na predvolené</button></div>
+<div class="header">
+  <div class="header-left">
+    <h1>Pending <span>Picks</span></h1>
+    <p>Open positions across every logged report · built 2026-09-25 08:00 UTC</p>
+  </div>
+  <div class="header-badges">
+    <span class="badge badge-games" id="badge-count">—</span>
+    <span class="badge badge-live" id="badge-units">—</span>
   </div>
 </div>
 
+<div class="container">
+  <div class="summary-bar" id="summary"></div>
+
+  <div class="controls">
+    <div class="control-group">
+      <span>Group by</span>
+      <button class="btn" data-group="none">None</button>
+      <button class="btn" data-group="sport">Sport</button>
+      <button class="btn" data-group="league">League</button>
+      <button class="btn" data-group="day">Day</button>
+    </div>
+    <div class="control-group">
+      <span>Sort</span>
+      <button class="btn" data-sort="asc">Time ↑</button>
+      <button class="btn" data-sort="desc">Time ↓</button>
+    </div>
+  </div>
+
+  <div id="rows"></div>
+
+  <div class="footer">
+    For educational purposes only. Never bet more than you can afford to lose.<br>
+    🇺🇸 1-800-522-4700 · 🇬🇧 0808 8020 133 · 🌍 BeGambleAware.org
+  </div>
+</div>
+
+<script id="pending-data" type="application/json">[{"id": "int_2026-09-25_001", "match": "Armenia vs Latvia", "pick": "Under 2.5 Goals", "market": "Goals — Under 2.5", "odds": 1.86, "stake": 1.5, "confidence": "MEDIUM", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T14:00:00Z", "start_display": "14:00 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_002", "match": "Georgia vs Northern Ireland", "pick": "Georgia to Win", "market": "1X2 — Full Time Result", "odds": 1.86, "stake": 2.0, "confidence": "HIGH", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T16:00:00Z", "start_display": "16:00 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_003", "match": "Georgia vs Northern Ireland", "pick": "Georgia 2-1 Northern Ireland", "market": "Correct Score", "odds": 8.5, "stake": 0.5, "confidence": "SPECULATIVE", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T16:00:00Z", "start_display": "16:00 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_004", "match": "Italy vs Belgium", "pick": "BTTS Yes", "market": "Both Teams to Score", "odds": 1.67, "stake": 1.5, "confidence": "MEDIUM", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T18:45:00Z", "start_display": "18:45 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_005", "match": "Hungary vs Ukraine", "pick": "BTTS Yes", "market": "Both Teams to Score", "odds": 1.8, "stake": 1.5, "confidence": "MEDIUM", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T18:45:00Z", "start_display": "18:45 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_006", "match": "Poland vs Bosnia and Herzegovina", "pick": "Poland to Win", "market": "1X2 — Full Time Result", "odds": 1.62, "stake": 2.0, "confidence": "HIGH", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T18:45:00Z", "start_display": "18:45 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_007", "match": "Sweden vs Romania", "pick": "Sweden to Win", "market": "1X2 — Full Time Result", "odds": 1.51, "stake": 2.5, "confidence": "HIGH", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T18:45:00Z", "start_display": "18:45 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "int_2026-09-25_008", "match": "Montenegro vs Cyprus", "pick": "Montenegro to Win", "market": "1X2 — Full Time Result", "odds": 1.78, "stake": 2.0, "confidence": "HIGH", "sport": "football", "league": "UEFA Nations League", "start_iso": "2026-09-25T18:45:00Z", "start_display": "18:45 UTC", "date_uncertain": false, "report": "football_nations_league_2026-09-25.html"}, {"id": "nfl_2026-09-24_001", "match": "Cincinnati Bengals @ Pittsburgh Steelers", "pick": "Under 42.5", "market": "Total", "odds": 1.909, "stake": 2.0, "confidence": "HIGH", "sport": "nfl", "league": "NFL", "start_iso": "2026-09-27T17:00:00Z", "start_display": "2026-09-27T17:00Z", "date_uncertain": false, "report": "nfl_week3_2026-09-24.html"}, {"id": "nfl_2026-09-24_002", "match": "Tennessee Titans @ New York Giants", "pick": "Under 38.5", "market": "Total", "odds": 1.926, "stake": 1.5, "confidence": "HIGH", "sport": "nfl", "league": "NFL", "start_iso": "2026-09-27T17:00:00Z", "start_display": "2026-09-27T17:00Z", "date_uncertain": false, "report": "nfl_week3_2026-09-24.html"}]</script>
 <script>
-(function(){
-  const STATES = {
-    ok:   { label: "OK",     next: "warn" },
-    warn: { label: "Málo",   next: "bad"  },
-    bad:  { label: "Výpadok",next: "ok"   }
-  };
-  const DEFAULTS = {
-    peopleNow: "7",
-    peopleMax: "18",
-    electricity: "ok",
-    water: "ok",
-    coffee: "warn"
-  };
+(function () {
+  var PICKS = JSON.parse(document.getElementById('pending-data').textContent || '[]');
+  var state = { group: 'sport', sort: 'asc' };
 
-  const peopleNowEl = document.getElementById('peopleNow');
-  const peopleMaxEl = document.getElementById('peopleMax');
-  const pills = Array.from(document.querySelectorAll('.status-pill'));
-  const resetBtn = document.getElementById('resetBtn');
+  var SPORTS = ['football', 'baseball', 'nfl', 'hockey', 'tennis'];
 
-  function applyPillState(pill, state){
-    if(!STATES[state]) state = 'ok';
-    pill.dataset.state = state;
-    pill.querySelector('.ptext').textContent = STATES[state].label;
+  // How long a game typically runs from its start, per sport. A pick counts as
+  // live from start until start + this; after that it is awaiting a result.
+  var LIVE_HOURS = { football: 2, baseball: 3, tennis: 2, hockey: 3, nfl: 3 };
+  var DEFAULT_LIVE_HOURS = 3;
+
+  function liveEndMs(p) {
+    var ms = startMs(p);
+    if (ms === null) return null;
+    var h = LIVE_HOURS[p.sport] || DEFAULT_LIVE_HOURS;
+    return ms + h * 3600 * 1000;
   }
 
-  function sanitizeNumber(el){
-    let v = el.textContent.replace(/[^0-9]/g,'');
-    if(v === '') v = '0';
-    v = String(parseInt(v,10));
-    el.textContent = v;
-    return v;
+  // 'upcoming' | 'live' | 'awaiting'
+  function phase(p, now) {
+    var ms = startMs(p);
+    if (ms === null || ms > now) return 'upcoming';
+    return now < liveEndMs(p) ? 'live' : 'awaiting';
   }
 
-  async function save(){
-    const data = {
-      peopleNow: peopleNowEl.textContent.trim(),
-      peopleMax: peopleMaxEl.textContent.trim(),
-      electricity: pills.find(p=>p.dataset.key==='electricity').dataset.state,
-      water: pills.find(p=>p.dataset.key==='water').dataset.state,
-      coffee: pills.find(p=>p.dataset.key==='coffee').dataset.state
-    };
-    try{
-      if(window.storage){
-        await window.storage.set('office-status', JSON.stringify(data), false);
+  function esc(s) {
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function startMs(p) {
+    if (!p.start_iso) return null;
+    var t = Date.parse(p.start_iso);
+    return isNaN(t) ? null : t;
+  }
+
+  // Decimal odds are what the log stores; the American form is what most books
+  // show for US sports, so carry both rather than force a mental conversion.
+  function american(dec) {
+    if (!dec || dec <= 1) return '';
+    return dec >= 2 ? '+' + Math.round((dec - 1) * 100)
+                    : String(Math.round(-100 / (dec - 1)));
+  }
+
+  function relative(ms, now) {
+    var diff = ms - now;
+    var mins = Math.round(Math.abs(diff) / 60000);
+    var txt;
+    if (mins < 60) txt = mins + 'm';
+    else if (mins < 60 * 24) txt = Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
+    else txt = Math.floor(mins / 1440) + 'd ' + Math.floor((mins % 1440) / 60) + 'h';
+    return diff >= 0 ? 'in ' + txt : txt + ' ago';
+  }
+
+  function confClass(c) {
+    var k = String(c || '').toLowerCase().replace(/[^a-z]+/g, '-');
+    if (k === 'very-high' || k === 'high' || k === 'medium' || k === 'low') return 'conf-' + k;
+    return 'conf-skip';
+  }
+
+  function timeCell(p, now) {
+    var ms = startMs(p);
+    if (ms === null) {
+      return '<div class="time"><div class="clock">TBD</div>' +
+        (p.start_display ? '<div class="raw">' + esc(p.start_display) + '</div>' : '') + '</div>';
+    }
+    var d = new Date(ms);
+    var clock = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // A multi-day slate that never wrote the day on the match leaves the clock
+    // trustworthy and the date a guess, so show the time and say so rather than
+    // print a weekday that may be wrong.
+    if (p.date_uncertain) {
+      return '<div class="time">' +
+        '<div class="clock">' + esc(clock) + '</div>' +
+        '<div class="rel unconfirmed" title="This report covers more than one day and ' +
+          'did not record which day this match falls on.">⚠ date unconfirmed</div>' +
+        '</div>';
+    }
+    var day = d.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' });
+    var live = phase(p, now) === 'live';
+    var rel = live ? 'LIVE · started ' + relative(ms, now) : day + ' · ' + relative(ms, now);
+    return '<div class="time">' +
+      '<div class="clock">' + esc(clock) + '</div>' +
+      '<div class="rel' + (live ? ' now' : '') + '">' + esc(rel) + '</div>' +
+      '</div>';
+  }
+
+  function rowHtml(p, now) {
+    var ms = startMs(p);
+    var ph = phase(p, now);
+    var late = ph === 'awaiting';
+    var live = ph === 'live';
+    var soon = ms !== null && !late && (ms - now) < 6 * 3600 * 1000;
+    var sportKey = SPORTS.indexOf(p.sport) >= 0 ? p.sport : 'other';
+    var undated = !!p.date_uncertain;
+    var am = american(p.odds);
+    return '<div class="pick-row' + (late ? ' late' : '') + (live ? ' live' : '') + (soon && !undated ? ' soon' : '') +
+      (undated ? ' undated' : '') + '"' +
+      // Not shown, but kept on the row for `accuracy_tracker.py update --id`.
+      (p.id ? ' data-id="' + esc(p.id) + '" title="' + esc(p.id) + '"' : '') + '>' +
+      timeCell(p, now) +
+      '<div class="fixture">' +
+        '<div class="teams">' + esc(p.match || '—') + '</div>' +
+        '<div class="meta">' +
+          '<span class="sport-pill sport-' + sportKey + '">' + esc(p.sport || '?') + '</span>' +
+          esc(p.league || '') +
+        '</div>' +
+      '</div>' +
+      '<div class="bet">' +
+        '<span class="cell-label">Bet</span>' +
+        '<div class="sel">' + esc(p.pick || '—') + '</div>' +
+        (p.market ? '<div class="mkt">' + esc(p.market) + '</div>' : '') +
+      '</div>' +
+      '<div class="odds">' +
+        '<span class="cell-label">Odds</span>' +
+        (p.odds ? esc(p.odds.toFixed(2)) : '—') +
+        (am ? '<span class="american">' + esc(am) + '</span>' : '') +
+      '</div>' +
+      '<div class="stake">' +
+        '<span class="cell-label">Stake</span>' +
+        (p.stake || p.stake === 0 ? esc(p.stake) + 'u' : '—') +
+      '</div>' +
+      '<div><span class="conf-badge ' + confClass(p.confidence) + '">' +
+        esc(p.confidence || 'n/a') + '</span></div>' +
+    '</div>';
+  }
+
+  function groupKey(p, now) {
+    if (state.group === 'sport') return p.sport || 'other';
+    if (state.group === 'league') return p.league || 'Unknown';
+    if (state.group === 'day') {
+      var ms = startMs(p);
+      if (ms === null) return 'Time TBD';
+      if (p.date_uncertain) return 'Date unconfirmed';
+      return new Date(ms).toLocaleDateString([], { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+    return '';
+  }
+
+  function sortPicks(list, now) {
+    var dir = state.sort === 'desc' ? -1 : 1;
+    return list.slice().sort(function (a, b) {
+      var ta = startMs(a), tb = startMs(b);
+      // Unknown start times have nothing to sort on, so they always sit last
+      // rather than flipping to the top when the direction is reversed.
+      if (ta === null && tb === null) return 0;
+      if (ta === null) return 1;
+      if (tb === null) return -1;
+      return (ta - tb) * dir;
+    });
+  }
+
+  function units(list) {
+    var sum = list.reduce(function (a, p) { return a + (Number(p.stake) || 0); }, 0);
+    return Math.round(sum * 100) / 100;
+  }
+
+  function section(title, list, now, cls) {
+    if (!list.length) return '';
+    var html = '<div class="group-head ' + (cls || '') + '">' +
+      '<h2>' + esc(title) + '</h2>' +
+      '<span class="count">' + list.length + (list.length === 1 ? ' pick' : ' picks') + '</span>' +
+      '<span class="units">' + units(list) + 'u</span></div>';
+    html += '<div class="pick-list">' +
+      list.map(function (p) { return rowHtml(p, now); }).join('') + '</div>';
+    return html;
+  }
+
+  function render() {
+    var now = Date.now();
+    // Upcoming / live / awaiting-result is decided at page load (and every
+    // minute after), not at build time, so a game moves itself across as it
+    // starts and as its expected duration runs out.
+    var upcoming = [], live = [], awaiting = [];
+    PICKS.forEach(function (p) {
+      var ph = phase(p, now);
+      (ph === 'live' ? live : ph === 'awaiting' ? awaiting : upcoming).push(p);
+    });
+
+    var sports = {};
+    PICKS.forEach(function (p) { sports[p.sport || 'other'] = 1; });
+    document.getElementById('summary').innerHTML = [
+      ['Pending picks', PICKS.length],
+      ['Units at risk', units(PICKS) + 'u'],
+      ['Sports', Object.keys(sports).length],
+      ['Live', live.length],
+      ['Awaiting result', awaiting.length]
+    ].map(function (c) {
+      return '<div class="summary-card"><div class="val">' + esc(c[1]) +
+        '</div><div class="lbl">' + esc(c[0]) + '</div></div>';
+    }).join('');
+
+    document.getElementById('badge-count').textContent =
+      PICKS.length + (PICKS.length === 1 ? ' pick' : ' picks');
+    document.getElementById('badge-units').textContent = units(PICKS) + 'u at risk';
+
+    var out = '';
+    if (!PICKS.length) {
+      out = '<div class="empty"><strong>Nothing pending</strong>' +
+        'Every logged pick has been settled. Log a new report to see it here.</div>';
+    } else {
+      out += section('Live', sortPicks(live, now), now, 'section-live');
+      if (state.group === 'none') {
+        out += section('Upcoming', sortPicks(upcoming, now), now);
+      } else {
+        var groups = {};
+        sortPicks(upcoming, now).forEach(function (p) {
+          var k = groupKey(p, now);
+          (groups[k] = groups[k] || []).push(p);
+        });
+        // Group headings follow the first kickoff in each group, so the page
+        // still reads chronologically top to bottom.
+        Object.keys(groups).sort(function (a, b) {
+          var fa = startMs(groups[a][0]), fb = startMs(groups[b][0]);
+          if (fa === null && fb === null) return a.localeCompare(b);
+          if (fa === null) return 1;
+          if (fb === null) return -1;
+          return fa === fb ? a.localeCompare(b) : fa - fb;
+        }).forEach(function (k) {
+          out += section(k, groups[k], now);
+        });
       }
-    }catch(e){ console.warn('Storage save failed', e); }
-  }
+      out += section('Awaiting result', sortPicks(awaiting, now), now, 'section-late');
+    }
+    document.getElementById('rows').innerHTML = out;
 
-  async function load(){
-    let data = null;
-    try{
-      if(window.storage){
-        const res = await window.storage.get('office-status', false);
-        if(res && res.value) data = JSON.parse(res.value);
-      }
-    }catch(e){ /* no saved data yet */ }
-    data = data || DEFAULTS;
-
-    peopleNowEl.textContent = data.peopleNow ?? DEFAULTS.peopleNow;
-    peopleMaxEl.textContent = data.peopleMax ?? DEFAULTS.peopleMax;
-    pills.forEach(pill=>{
-      const key = pill.dataset.key;
-      applyPillState(pill, data[key] || DEFAULTS[key]);
+    document.querySelectorAll('.btn[data-group]').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.group === state.group);
+    });
+    document.querySelectorAll('.btn[data-sort]').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.sort === state.sort);
     });
   }
 
-  peopleNowEl.addEventListener('blur', ()=>{ sanitizeNumber(peopleNowEl); save(); });
-  peopleMaxEl.addEventListener('blur', ()=>{ sanitizeNumber(peopleMaxEl); save(); });
-  [peopleNowEl, peopleMaxEl].forEach(el=>{
-    el.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter'){ e.preventDefault(); el.blur(); }
+  document.querySelectorAll('.btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.dataset.group) state.group = b.dataset.group;
+      if (b.dataset.sort) state.sort = b.dataset.sort;
+      render();
     });
   });
 
-  pills.forEach(pill=>{
-    pill.addEventListener('click', ()=>{
-      const cur = pill.dataset.state;
-      const next = STATES[cur] ? STATES[cur].next : 'ok';
-      applyPillState(pill, next);
-      save();
-    });
-  });
-
-  resetBtn.addEventListener('click', ()=>{
-    peopleNowEl.textContent = DEFAULTS.peopleNow;
-    peopleMaxEl.textContent = DEFAULTS.peopleMax;
-    pills.forEach(pill=> applyPillState(pill, DEFAULTS[pill.dataset.key]));
-    save();
-  });
-
-  load();
+  render();
+  // Keeps "in 2h" and the upcoming/awaiting split honest on a page left open.
+  setInterval(render, 60000);
 })();
 </script>
-
 </body>
 </html>
